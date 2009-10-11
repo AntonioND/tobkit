@@ -18,13 +18,6 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-/*
- * constants.h
- *
- *  Created on: Nov 16, 2008
- *      Author: tob
- */
-
 #ifndef CONSTANTS_H_
 #define CONSTANTS_H_
 

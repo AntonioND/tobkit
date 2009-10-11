@@ -18,13 +18,6 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-/*
- * widgetmanager.h
- *
- *  Created on: Feb 21, 2009
- *      Author: tob
- */
-
 #ifndef WIDGETMANAGER_H_
 #define WIDGETMANAGER_H_
 

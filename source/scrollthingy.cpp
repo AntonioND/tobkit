@@ -95,7 +95,6 @@ void ScrollThingy::setScrollPosition(int position)
     position = clamp(position, 0, _n_elements - _n_elements_visible);
     _scrollpos = position;
     calcScrollThingy();
-    signal_changed(_scrollpos);
     pleaseDraw();
 }
 
@@ -111,12 +110,23 @@ void ScrollThingy::setNElements(int n)
     pleaseDraw();
 }
 
+int ScrollThingy::getNElements()
+{
+    return _n_elements;
+}
+
 /* ===================== PRIVATE ===================== */
 
 void ScrollThingy::calcScrollThingy(void)
 {
-    _scrollthingy_size = max(min(_size * _n_elements_visible / _n_elements, _size), MIN_SCROLLTHINGY_SIZE);
-    _scrollthingy_pos   = min((_size - _scrollthingy_size) * _scrollpos / (_n_elements - _n_elements_visible), _size - _scrollthingy_size);
+    if(_n_elements <= _n_elements_visible) {
+        _scrollthingy_pos = 0;
+        _scrollthingy_size = _size;
+    } else {
+        _scrollthingy_size = min(_size * _n_elements_visible / _n_elements, _size);
+        _scrollthingy_size = max(_scrollthingy_size, MIN_SCROLLTHINGY_SIZE);
+        _scrollthingy_pos = min((_size - _scrollthingy_size) * _scrollpos / (_n_elements - _n_elements_visible), _size - _scrollthingy_size);
+    }
 }
 
 void ScrollThingy::setScrollThingyPos(int scrollthingy_pos)
@@ -125,6 +135,7 @@ void ScrollThingy::setScrollThingyPos(int scrollthingy_pos)
     new_scrollpos = _scrollthingy_pos * (_n_elements - _n_elements_visible) / (_size - _scrollthingy_size);
     new_scrollpos = clamp(new_scrollpos, 0, _n_elements - _n_elements_visible);
     if(_scrollpos != new_scrollpos) {
+        _scrollpos = new_scrollpos;
         signal_changed(new_scrollpos);
     }
     _scrollpos = new_scrollpos;
@@ -133,14 +144,14 @@ void ScrollThingy::setScrollThingyPos(int scrollthingy_pos)
 
 void ScrollThingy::draw(void)
 {
-    drawGradient(_theme->gradient_bg, 0, 0, _width, _height, false);
+    drawGradient(_theme->gradient_bg, 1, 1, _width-2, _height-2, false);
     drawBorder();
 
     if(_horizontal) {
-        drawGradient(_theme->gradient_ctrl, _scrollthingy_pos, 0, _scrollthingy_size, WIDTH, _buttonstate == SCROLLTHINGY);
+        drawGradient(_theme->gradient_ctrl, _scrollthingy_pos+1, 1, _scrollthingy_size-2, WIDTH-2, _buttonstate == SCROLLTHINGY);
         drawBox(_scrollthingy_pos, 0, _scrollthingy_size, WIDTH);
     } else {
-        drawGradient(_theme->gradient_ctrl, 0, _scrollthingy_pos, WIDTH, _scrollthingy_size, _buttonstate == SCROLLTHINGY);
+        drawGradient(_theme->gradient_ctrl, 1, _scrollthingy_pos+1, WIDTH-2, _scrollthingy_size-2, _buttonstate == SCROLLTHINGY);
         drawBox(0, _scrollthingy_pos, WIDTH, _scrollthingy_size);
     }
 }

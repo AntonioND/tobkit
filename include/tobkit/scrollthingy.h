@@ -48,12 +48,13 @@ class ScrollThingy: public TobKit::Widget {
         int getScrollPosition();
 
         void setNElements(int n);
+        int getNElements();
 
         // Signals
         sigc::signal<void, int> signal_changed;
 
         static const int WIDTH = 7;
-        static const int MIN_SCROLLTHINGY_SIZE = 5;
+        static const int MIN_SCROLLTHINGY_SIZE = 15;
 
     private:
         // Calculate height and position of the scroll thingy

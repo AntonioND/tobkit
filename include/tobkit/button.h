@@ -31,7 +31,7 @@ namespace TobKit
 {
 
 /** \brief The Button, the most basic of Widgets. Humble, yet powerful. Behold it's amazing powers!
- *
+ * \image html button.png
  */
 class Button: public Widget
 {
@@ -40,9 +40,8 @@ class Button: public Widget
          * Creates a Button
          * \param owner the GUI that the Button belongs to
          * \param caption the text on the Button
-         * \param x x-position on the screen
+         * \param x x-position on the screen.
          * \param y y-position on the screen
-         * \param screen the screen that the Button is on
          * \param width width of the Button
          * \param height height of the Button
          * \param listening_buttons hardware buttons that activate the Button, ORed together, e.g. KEY_A | KEY_B

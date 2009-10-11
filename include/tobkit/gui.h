@@ -18,14 +18,6 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-/*******************
-DS Tracker GUI Class
-
-Contains the widgets
-Gets pen/key events
-Calls touched widget
-********************/
-
 #ifndef GUI_H
 #define GUI_H
 

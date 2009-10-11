@@ -18,13 +18,13 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-/**********************
-DS Tracker Widget Class
-Has rectangular area
-**********************/
-
 #ifndef WIDGET_H
 #define WIDGET_H
+
+#define DEBUG
+#ifdef DEBUG
+#include <cstdio>
+#endif
 
 #include <nds.h>
 #include <limits.h>

@@ -143,8 +143,11 @@ void Widget::drawString(const string &str, int tx, int ty, uint maxwidth, u16 co
 	uint charidx, i, j;
 	uint drawpos = 0; u8 col;
 	char *charptr;
+	int startline = (ty > 0) ? 0 : -ty;
+	int endline = (ty + 11 < _height) ? 11 : (_height - ty);
+	if(endline <= startline) return;
 
-	for(uint pos = 0; pos<str.length(); ++pos) {
+	for(uint pos = 0; pos < str.length(); ++pos) {
 		charptr = strchr(fontchars, str[pos]);
 		if(charptr==0) {
 			charidx = 66; // '?'
@@ -152,23 +155,23 @@ void Widget::drawString(const string &str, int tx, int ty, uint maxwidth, u16 co
 			charidx = charptr - fontchars;
 		}
 
-		if(drawpos+charwidths_8x11[charidx] >= maxwidth) {
+		if(drawpos + charwidths_8x11[charidx] >= maxwidth) {
 		    break;
 		}
 
-		for(j=0;j<11;++j) {
-			for(i=0;i<8;++i) {
+		for(j = startline; j < endline; ++j) {
+			for(i = 0; i < 8; ++i) {
 				// Print a character from the bitmap font
 				// each char is 8 pixels wide, and 8 pixels
 				// are in a byte.
-				col = font_8x11_raw[N_FONT_CHARS*j+charidx];
+				col = font_8x11_raw[N_FONT_CHARS * j + charidx];
 				if(col & BIT(i)) {
-					(*_vram)[SCREEN_WIDTH*(j+_y+ty)+(i+_x+tx+drawpos)]= color;
+					(*_vram)[SCREEN_WIDTH*(j + _y + ty) + (i + _x + tx + drawpos)] = color;
 				}
 			}
 		}
 
-		drawpos += charwidths_8x11[charidx]+1;
+		drawpos += charwidths_8x11[charidx] + 1;
 	}
 }
 
@@ -308,7 +311,14 @@ void Widget::drawGradient(const std::vector<u16> &gradient, int tx, int ty, int 
 	int n_shades = gradient.size();
 	u16 *vram_ptr = *_vram + SCREEN_WIDTH*(_y+ty) + _x + tx;
 	int step = n_shades / th;
-	for(int y=0;y<th;++y) {
+
+	int start, end, inc;
+	if(!reverse) {
+	    start = 0; end = th; inc = 1;
+	} else {
+	    start = th; end = 0; inc = -1;
+	}
+	for(int y = start; y != end; y += inc) {
 	    for(int x=0;x<tw;++x) {
 	        *(vram_ptr++) = gradient[y * step];
 	    }
