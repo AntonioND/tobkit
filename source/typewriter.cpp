@@ -77,7 +77,7 @@ void Typewriter::setupTileBg(void)
     Widget::_gui->addTileBackground(this, 7776, &char_base, 312, &map_base, &bg, &bgh);
     dmaCopy((u16*)typewriter_Tiles, char_base, 7776);
     bgSetScroll(bgh, -kx, -ky);
-    bgUpdate(bgh);
+    bgUpdate();
 }
 
 // Event calls

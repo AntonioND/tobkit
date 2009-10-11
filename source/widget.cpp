@@ -285,62 +285,14 @@ void Widget::drawPixel(int tx, int ty, u16 col) {
 
 void Widget::drawGradient(const std::vector<u16> &gradient, int tx, int ty, int tw, int th, bool reverse)
 {
-	// Bresenham algorithm for lookups in the gradient cache without divisions
 	int n_shades = gradient.size();
-
-	u32 x1 = 0; u32 x2 = th-1;
-	u32 y1 = 0; u32 y2 = n_shades;
-	s32 dy = y2 - y1; s32 dx = x2 - x1;
-
-	// If the gradient of the line is greater than one we have to flip the axes
-	if ( abs(dy) < dx )	{
-		u16 xp = x1; u16 yp = y1;
-		s32 d = 2*dy - dx;
-
-		for(; xp<=x2; xp++)	{
-			if(d > 0) {
-				yp++;
-				d -= 2 * dx;
-			}
-
-			// draw a line of the gradient
-			if(!reverse) {
-				for(int i=0;i<tw;++i) {
-					(*_vram)[SCREEN_WIDTH*(_y+ty+xp)+_x+tx+i] = gradient[yp];
-				}
-			} else {
-				for(int i=0;i<tw;++i) {
-					(*_vram)[SCREEN_WIDTH*(_y+ty+xp)+_x+tx+i] = gradient[n_shades - yp];
-				}
-			}
-			d += 2 * dy;
-		}
-	} else {
-		u16 tmp;
-		tmp = x1; x1 = y1; y1 = tmp;
-		tmp = x2; x2 = y2; y2 = tmp;
-		dy = y2 - y1; dx = x2 - x1;
-		u16 xp = x1; u16 yp = y1;
-		s32 d = 2 * dy - dx;
-
-		for(xp=x1; xp<=x2; xp++) {
-			if(d > 0) {
-				yp ++;
-				d -= 2 * dx;
-			}
-
-			// draw a line of the gradient
-			if(!reverse) {
-				for(int i=0;i<tw;++i) {
-					(*_vram)[SCREEN_WIDTH*(_y+ty+yp)+_x+tx+i] = gradient[xp];
-				}
-			} else {
-				for(int i=0;i<tw;++i) {
-					(*_vram)[SCREEN_WIDTH*(_y+ty+yp)+_x+tx+i] = gradient[n_shades - xp];
-				}
-			}
-			d += 2 * dy;
-		}
+	u16 *vram_ptr = *_vram + SCREEN_WIDTH*(_y+ty) + _x + tx;
+	int step = n_shades / th;
+	for(int y=0;y<th;++y) {
+	    for(int x=0;x<tw;++x) {
+	        *(vram_ptr++) = gradient[y * step];
+	    }
+	    vram_ptr += SCREEN_WIDTH - tw;
 	}
 }
 

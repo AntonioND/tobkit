@@ -20,7 +20,7 @@
  *
  * \section install_sec Installation
  *
- *  Tobkit was developed using <b>devkitARM r24</b> and <b>libnds 1.3.1</b>. Make sure you have
+ *  Tobkit was developed using <b>devkitARM r26</b> and <b>libnds 1.3.8</b>. Make sure you have
  *  these versions or newer ones.
  *
  *  To install Tobkit, just copy
@@ -129,6 +129,7 @@
 
 #include <tobkit/bitbutton.h>
 #include <tobkit/button.h>
+#include <tobkit/scrollthingy.h>
 //#include <tobkit/checkbox.h>
 //#include <tobkit/fileselector.h>
 //#include <tobkit/fontchars.h>
@@ -140,7 +141,7 @@
 //#include <tobkit/keyboard.pal.h>
 //#include <tobkit/keyboard.raw.h>
 //#include <tobkit/label.h>
-//#include <tobkit/listbox.h>
+#include <tobkit/listbox.h>
 //#include <tobkit/memoryindicator.h>
 //#include <tobkit/messagebox.h>
 //#include <tobkit/numberbox.h>

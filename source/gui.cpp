@@ -69,7 +69,7 @@ bool GUI::setupConsole(u16 color)
 		int tile_base = _free_vram / 16 - 1;
 		_free_vram = tile_base * 16;
 
-		PrintConsole *pc = consoleInit(NULL, bg, BgType_Text4bpp, BgSize_T_256x256, map_base, tile_base, true);
+		PrintConsole *pc = consoleInit(NULL, bg, BgType_Text4bpp, BgSize_T_256x256, map_base, tile_base, true, true);
 		bgSetPriority(pc->bgId, 1);
 		BG_PALETTE[255] = color;
 	} else {
@@ -86,7 +86,7 @@ bool GUI::setupConsole(u16 color)
 		int tile_base = _free_vram / 16 - 1;
 		_free_vram = tile_base * 16;
 
-		PrintConsole *pc = consoleInit(NULL, bg, BgType_Text4bpp, BgSize_T_256x256, map_base, tile_base, false);
+		PrintConsole *pc = consoleInit(NULL, bg, BgType_Text4bpp, BgSize_T_256x256, map_base, tile_base, false, true);
 		bgSetPriority(pc->bgId, 1);
 		BG_PALETTE_SUB[255] = color;
 	}
@@ -219,7 +219,7 @@ bool GUI::addTileBackground(Widget* widget, int tileset_size, u16 **tile_ram,
     *tile_ram = (u16*)bgGetGfxPtr(bgh);
     *map_ram = (u16*)bgGetMapPtr(bgh);
     bgSetScroll(bgh, 0, 0);
-    bgUpdate(bgh);
+    bgUpdate();
     if(layer != NULL) {
         *layer = bg;
     }

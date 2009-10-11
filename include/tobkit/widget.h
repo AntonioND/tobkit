@@ -8,7 +8,7 @@ Has rectangular area
 
 #include <nds.h>
 #include <limits.h>
-#include <sigc++.h>
+#include <sigc++/sigc++.h>
 #include <string>
 
 #include "tobkit/constants.h"

@@ -26,7 +26,7 @@ class Theme
 		u16 col_text;
 		u16 col_signal;
 
-		std::vector<u16> gradient_ctrl, gradient_ctrl_disabled; // Precalculated gradients for quickly drawing nice buttons
+		std::vector<u16> gradient_ctrl, gradient_ctrl_disabled, gradient_bg; // Precalculated gradients for quickly drawing nice buttons
 	private:
 		void precalcGradients(void);
 };

@@ -61,4 +61,14 @@ void Theme::precalcGradients(void)
 				     ((col1 >> 10) & 0x001F)*alpha/255 + ((col2 >> 10) & 0x001F)-((col2 >> 10) & 0x001F)*alpha/255
 				     )|BIT(15);
 		}
+
+		gradient_bg.resize(256);
+		col1 = col_medium_bg; col2 = col_light_bg;
+		for(u16 alpha=0;alpha<256; ++alpha) {
+                // This is the above code in 1 Line (faster)
+                gradient_bg[alpha] = RGB15((col1 & 0x001F)*alpha/255 + (col2 & 0x001F)-(col2 & 0x001F)*alpha/255,
+                         ((col1 >> 5) & 0x001F)*alpha/255 + ((col2 >> 5) & 0x001F)-((col2 >> 5) & 0x001F)*alpha/255,
+                         ((col1 >> 10) & 0x001F)*alpha/255 + ((col2 >> 10) & 0x001F)-((col2 >> 10) & 0x001F)*alpha/255
+                         )|BIT(15);
+            }
 }
