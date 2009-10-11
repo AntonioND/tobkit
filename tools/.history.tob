@@ -1,0 +1,12 @@
+2008-11-21.00-51-39 cp ../../../NitroTracker/gfx/rgb2bin.c .
+2008-11-21.00-52-49 vi rgb2bin.c 
+2009-02-08.18-41-24 gcc -o rgb2bin rgb2bin.c 
+2009-02-08.18-41-27 ./rgb2bin 
+2009-02-08.19-13-58 gcc -o rgb2bin rgb2bin.c 
+2009-02-08.19-14-06 vi tools/rgb2bin.c 
+2009-02-08.19-14-26 vi rgb2bin.c 
+2009-02-08.19-14-28 gcc -o rgb2bin rgb2bin.c 
+2009-02-08.19-14-30 ./rgb2bin 
+2009-02-08.19-14-37 vi rgb2bin.c 
+2009-02-08.19-14-39 gcc -o rgb2bin rgb2bin.c 
+2009-02-08.19-14-41 ./rgb2bin 
