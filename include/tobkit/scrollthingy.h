@@ -18,13 +18,6 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-/*
- * scrollthingy.h
- *
- *  Created on: Feb 8, 2009
- *      Author: tob
- */
-
 #ifndef SCROLLTHINGY_H_
 #define SCROLLTHINGY_H_
 

@@ -51,16 +51,31 @@ class Widget
 	friend class WidgetManager;
 
 	public:
+        /**
+         * Creates a Widget. This is only called from the constructors of subclasses.
+         * \param x x-position on the screen.
+         * \param y y-position on the screen
+         * \param width width of the Widget
+         * \param height height of the Widget
+         * \param owner the GUI that the Widget belongs to
+         * \param listening_buttons hardware buttons that activate the Button, ORed together, e.g. KEY_A | KEY_B
+         * \param visible if the Widget is drawn and responds to input
+         */
 		Widget(int x, int y, int width, int height, WidgetManager *owner, u16 listening_buttons=0, bool visible=true);
 		virtual ~Widget(void);
 
-		// Callback registration
-		// ... is done in the class
-
-		// Drawing request
+		/**
+		 * Request drawing the Widget. The Widget is not drawn if it is flagged as invisible or if it is occluded.
+		 */
 		void pleaseDraw(void);
 
-		// Get position
+		/**
+		 * Get the Widget geometry.
+		 * \param x pointer to the variable that will hold the Widget's x-position
+		 * \param y pointer to the variable that will hold the Widget's y-position
+		 * \param width pointer to the variable that will hold the Widget's width
+		 * \param height pointer to the variable that will hold the Widget's height
+		 */
 		void getPos(int *x, int *y, int *width, int *height);
 
 		// Toggle visibility
@@ -69,23 +84,64 @@ class Widget
 		// a tab of a tabbox that is currently not selected. Show/hide is used to
 		// hide controls that shall not be seen at the moment.
 
-		// Can the widget be seen by the user?
+		/**
+		 * Can the widget be seen by the user?
+		 * \returns whether or not the widget can be seen.
+		 */
 		bool isExposed(void);
 
+		/**
+		 * Flags the Widget as visible.
+		 */
 		virtual void show(void);
+
+		/**
+		 * Flags the Widget as invisible.
+		 */
 		virtual void hide(void);
+
+		/**
+		 * Returns the Widget's visible flag.
+		 * The Widget can still be invisible if it's occluded. For determining whether the Widget is actually visible on the screen, use isExposed.
+		 */
 		bool isVisible(void) { return _visible; }
 
+		/**
+		 * Flags the Widget as occluded. Only call this when implementing a Widget can manages occlusions, like a TabBox.
+		 */
 		virtual void occlude(void);
+
+		/**
+         * Flags the Widget as not occluded. Only call this when implementing a Widget can manages occlusions, like a TabBox.
+         */
 		virtual void reveal(void);
+
+		/**
+		 * Returns the Widget's occluded flag.
+		 * The Widget can still be invisible if it's flagged as invisible. For determining whether the Widget is actually visible on the screen, use isExposed.
+		 */
 		bool isOccluded(void) { return _occluded; }
 
-		// Resize
+		/**
+		 * Change the size of the Widget
+		 * \param w the new width
+		 * \param h the new height
+		 */
 		void resize(u16 w, u16 h);
 
-		// Toggle enabled/disabled
+		/**
+		 * Flag the Widget as enabled so it's drawn like an enabled Widget and accepts input.
+		 */
 		virtual void enable(void);
+
+		/**
+		 * Flag the Widget as disabled so it's drawn like a disabled Widget and does not accept input.
+		 */
 		virtual void disable(void);
+
+		/**
+		 * Get the Widget's enabled flag.
+		 */
 		bool isEnabled(void) { return _enabled; }
 
 	protected:

@@ -127,7 +127,8 @@
  * This will create the file my_icon.bin.
  *
  * \section useicon Using the icon
- * Copy the icon to the data folder of your project. If this folder does not exist, create it. In the source, add:
+ * Copy the icon to the <b>data</b> folder of your project. If this folder does not exist, create it and make sure that the DATA variable
+ * in the Makefile points to it. Then, in the source, add:
  * \code
  * #include "my_icon_bin.h"
  * \endcode
