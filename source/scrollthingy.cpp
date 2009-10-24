@@ -66,7 +66,7 @@ void ScrollThingy::penDown(int x, int y)
     }
 }
 
-void ScrollThingy::penUp(int x, int y)
+void ScrollThingy::penUp()
 {
     _buttonstate = NONE;
     pleaseDraw();

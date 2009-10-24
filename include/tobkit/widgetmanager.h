@@ -32,28 +32,87 @@ namespace TobKit {
 class GUI;
 class Widget;
 
+/**
+ * \brief The manager. Always busy. Wearing a suit. Buying stocks on the cellphone. Manages Widgets in his spare time.
+ *
+ * This is a class that can contain Widgets. The GUI inherits from it, and so do all Widgets that contain sub-widgets.
+ * It manages
+ * \li \c Widget input (both via pen and hardware buttons)
+ * \li \c Widget positions
+ * \li \c Widget visibility (Widgets can be explicitly hidden or they can be occluded, e.g. in inactive TabBox tabs)
+ * \li \c Widget drawing
+ *
+ * You only need to worry about this class if you want to implement a Widget that contains sub-Widgets.
+ */
 class WidgetManager {
     friend class Widget;
 
     public:
+        /**
+         * This constructor is used only by the GUI (which inherits from WidgetManager)
+         * \param screen the screen all Widgets in this WidgetManager will appear on
+         * \param gui a pointer to the GUI object
+         * \param theme the Theme that all Widgets managed by this WidgetManager will have
+         */
         WidgetManager(Screen screen, GUI *gui, Theme theme);
 
-        // This constructor is used to override bg_color and text_color. This is necessary for Widgets that
-        // subclass a WidgetManager, but have a background color different from the theme's background color.
+        /**
+         * This constructor is used to override bg_color and text_color. This is necessary for Widgets that
+         * subclass a WidgetManager, but have a background color different from the theme's background color.
+         * \param screen the screen all Widgets in this WidgetManager will appear on
+         * \param gui a pointer to the GUI object
+         * \param theme the Theme that all Widgets managed by this WidgetManager will have
+         * \param bg_color the background color of the widget that inherits WidgetManager
+         * \param text_color the text color of the widget that inherits WidgetManager
+         */
         WidgetManager(Screen screen, GUI *gui, Theme theme, u16 bg_color, u16 text_color);
 
+        /**
+         * This is the constructor you should use when creating a Widget that inherits from WidgetManager
+         * \param widgetmanager the owning WidgetManager of your Widget
+         * \param bg_color the background color of the widget that inherits WidgetManager
+         * \param text_color the text color of the widget that inherits WidgetManager
+         */
         WidgetManager(WidgetManager &widgetmanager, u16 bg_color, u16 text_color);
 
         virtual ~WidgetManager();
 
-        // Input handler - call this every vblank
+        /**
+         * Handle the input from the user. This should be called every VBlank.
+         * You only need this if you implement your own GUI.
+         */
         void handleInput(u16 keysdown, u16 keysup, u16 keysheld, touchPosition touch);
 
          // Input events. The user shouldn't use these except if he wants to fake pen events
+
+        /**
+         * Tell that WidgetManager that the pen is put down.
+         * You only need this method if you want to simulate the event manually.
+         */
         void penDown(int x, int y);
-        void penUp(int x, int y); // Remove the coordinates here!
+
+        /**
+         * Tell that WidgetManager that the pen is lifted.
+         * You only need this method if you want to simulate the event manually.
+         */
+        void penUp();
+
+        /**
+         * Tell that WidgetManager that the pen is moved.
+         * You only need this method if you want to simulate the event manually.
+         */
         void penMove(int x, int y);
+
+        /**
+         * Tell that WidgetManager that a hardware button was pressed.
+         * You only need this method if you want to simulate the event manually.
+         */
+
         void buttonPress(u16 buttons);
+        /**
+         * Tell that WidgetManager that a hardware button was released.
+         * You only need this method if you want to simulate the event manually.
+         */
         void buttonRelease(u16 buttons);
 
     protected:

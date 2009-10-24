@@ -41,7 +41,7 @@ class ScrollThingy: public TobKit::Widget {
 
         // Event calls
         void penDown(int x, int y);
-        void penUp(int x, int y);
+        void penUp();
         void penMove(int x, int y);
 
         void setScrollPosition(int position);

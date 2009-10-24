@@ -55,7 +55,7 @@ void Button::penDown(int x, int y)
     draw();
 }
 
-void Button::penUp(int x, int y)
+void Button::penUp()
 {
     _pen_is_down = false;
     draw();

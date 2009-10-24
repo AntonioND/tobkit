@@ -101,7 +101,7 @@ class Widget
 
 		// Event calls - called by GUI
 		virtual void penDown(int px, int py) {};
-		virtual void penUp(int px, int py) {};
+		virtual void penUp() {};
 		virtual void penMove(int px, int py) {};
 		virtual void buttonPress(u16 button) {};
 		virtual void buttonRelease(u16 button) {};

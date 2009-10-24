@@ -40,7 +40,7 @@ class Typewriter: public Widget, public WidgetManager {
 
 		// Event calls
 		void penDown(int x, int y);
-		void penUp(int x, int y);
+		void penUp();
 
 		void buttonPress(u16 button);
 

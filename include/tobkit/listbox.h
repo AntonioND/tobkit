@@ -76,7 +76,7 @@ class ListBox: public Widget, public WidgetManager {
          * This method is called by the GUI.
          * You only need this method if you want to simulate the event manually.
          */
-        void penUp(int x, int y);
+        void penUp();
 
         // Add / delete /set /get elements
 

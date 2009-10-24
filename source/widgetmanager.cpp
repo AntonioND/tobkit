@@ -71,7 +71,7 @@ void WidgetManager::handleInput(u16 keysdown, u16 keysup, u16 keysheld, touchPos
 
     if(keysup & KEY_TOUCH) // PenUp
     {
-        penUp(touch.px, touch.py);
+        penUp();
     }
 
     if( (keysheld & KEY_TOUCH) && ( (touch.px != last_pen_x) || (touch.py != last_pen_y) ) ) // PenMove
@@ -120,11 +120,11 @@ void WidgetManager::penDown(int x, int y)
     }
 }
 
-void WidgetManager::penUp(int x, int y)
+void WidgetManager::penUp()
 {
     if(_active_widget!=0) {
         if(_active_widget->isVisible()==true) {
-            _active_widget->penUp(x, y);
+            _active_widget->penUp();
             _active_widget = 0;
         }
     }

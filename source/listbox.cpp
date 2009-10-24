@@ -55,7 +55,7 @@ void ListBox::penDown(int x, int y) {
     }
 }
 
-void ListBox::penUp(int x, int y) {
+void ListBox::penUp() {
     // Item select
     if( (_input_state == LIST) && (!_scrolled) ) {
         u16 rel_item_clicked;
@@ -69,7 +69,7 @@ void ListBox::penUp(int x, int y) {
     }
 
     _input_state = NONE;
-    WidgetManager::penUp(x, y);
+    WidgetManager::penUp();
 }
 
 void ListBox::penMove(int x, int y) {

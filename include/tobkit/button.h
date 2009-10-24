@@ -65,7 +65,7 @@ class Button: public Widget
          * This method is called by the GUI.
          * You only need this method if you want to simulate the event manually.
          */
-        void penUp(int x, int y);
+        void penUp();
 
         /**
          * A (hardware) button that the (software) Button reacts to is pressed.

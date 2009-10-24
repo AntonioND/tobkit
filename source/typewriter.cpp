@@ -180,10 +180,10 @@ void Typewriter::penDown(int x, int y)
 	}
 }
 
-void Typewriter::penUp(int x, int y)
+void Typewriter::penUp()
 {
 	setTile(tilex, tiley, pal_id_normal);
-	WidgetManager::penUp(x, y);
+	WidgetManager::penUp();
 }
 
 void Typewriter::buttonPress(u16 button)
