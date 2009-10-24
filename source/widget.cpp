@@ -139,12 +139,11 @@ void Widget::disable(void)
 
 void Widget::drawString(const string &str, int tx, int ty, uint maxwidth, u16 color)
 {
-	// Draw text
 	uint charidx, i, j;
 	uint drawpos = 0; u8 col;
 	char *charptr;
 	int startline = (ty > 0) ? 0 : -ty;
-	int endline = (ty + 11 < _height) ? 11 : (_height - ty);
+	int endline = (ty + FONT_HEIGHT < _height) ? FONT_HEIGHT : (_height - ty);
 	if(endline <= startline) return;
 
 	for(uint pos = 0; pos < str.length(); ++pos) {
@@ -160,7 +159,7 @@ void Widget::drawString(const string &str, int tx, int ty, uint maxwidth, u16 co
 		}
 
 		for(j = startline; j < endline; ++j) {
-			for(i = 0; i < 8; ++i) {
+			for(i = 0; i < FONT_WIDTH; ++i) {
 				// Print a character from the bitmap font
 				// each char is 8 pixels wide, and 8 pixels
 				// are in a byte.

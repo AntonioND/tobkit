@@ -139,6 +139,36 @@
  * \endcode
  */
 
+/*! \page custom_font Customizing TobKit's font
+ *
+ * If you want to swap out TobKit's font for your own, get ready for a bit of manual work.
+ *
+ * \section makefont Creating the font
+ *
+ * Fire up Gimp or whatever image editor you like and create an image similar to fontchars/font_8x11.png.
+ * You don't have to use this exact set of characters: For example, you can use only lower case letters since you specify which letter is where later on.
+ * In the image, make sure every character uses 8x11 pixels. You can probably also create fonts other than 8x11 pixels but this isn't tested yet.
+ * Save the font as a plain RGB image,
+ * i.e. an image with no header, just alternating RGB values. If your image editor does not support this format, save the image as
+ * png and use ImageMagick's convert tool like this:
+ * \code
+ * convert my_font.png my_font.rgb
+ * \endcode
+ *
+ * \section fontconvert Converting the font
+ *
+  * In the <b>tools</b> folder of TobKit, you will find the tool rgb2bin, which converts rgb images to the correct format. Call it like this:
+ * \code
+ * ./rgb2bin my_font.rgb
+ * \endcode
+ * This will create the file my_font.bin. In TobKit's data folder, replace font_8x11.raw with your font.
+ *
+ * \section fontcode Add the font to the code
+ *
+ * Take a look at fontchars.h and fontchars.cpp and modify them to fit your font. This is the part that's quite a hassle: You need to specify the width of each character in the source file!
+ * After that, you can enjoy TobKit with your custom font!
+ */
+
 #include <tobkit/gui.h>
 
 #include <tobkit/bitbutton.h>

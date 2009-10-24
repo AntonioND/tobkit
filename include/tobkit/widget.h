@@ -155,29 +155,160 @@ class Widget
 		Theme *_theme;
 		u16 _bgcolor, _textcolor; // Color of the background (for hiding the widget)
 
-		// Event calls - called by GUI
+		/**
+		 * This is called to notify the widget that the pen was put down.
+		 * Implement this function in your Widget.
+		 * There is no sane reason to call this function yourself!
+		 * \param px the x-position of the pen
+		 * \param py the y-position of the pen
+		 */
 		virtual void penDown(int px, int py) {};
+
+		/**
+		 * This is called to notify the widget that the pen was lifted.
+		 * Implement this function in your Widget.
+		 * There is no sane reason to call this function yourself!
+		 */
 		virtual void penUp() {};
+
+		/**
+		 * This is called to notify the widget that the pen was moved.
+         * Implement this function in your Widget.
+         * There is no sane reason to call this function yourself!
+         * \param px the x-position of the pen
+         * \param py the y-position of the pen
+		 */
 		virtual void penMove(int px, int py) {};
+
+		/**
+		 * This is called to notify the widget that a hardware button was pressed.
+		 * \param button the hardware button that was pressed (as defined in libnds)
+		 */
 		virtual void buttonPress(u16 button) {};
+
+		/**
+         * This is called to notify the widget that a hardware button was released.
+         * \param button the hardware button that was released (as defined in libnds)
+         */
 		virtual void buttonRelease(u16 button) {};
 
 		// Draw utility functions
+
+		/**
+		 * Draw text.
+		 * \param str the string you want to draw
+		 * \param tx the text's x-position
+		 * \param ty the text's y-position
+		 * \param maxwidth the maximum width of the text in pixels
+		 * \param color the color of the text as an RGB15
+		 * \sa \ref custom_font
+		 */
 		void drawString(const string &str, int tx, int ty, uint maxwidth=255, u16 color=RGB15(0,0,0)|BIT(15));
+
+		/**
+		 * Draw a rectangular box (outlined).
+		 * \param tx x-coordinate of the upper left corner of the box
+		 * \param ty y-coordinate of the upper left corner of the box
+		 * \param tw width of the box
+		 * \param th height of the box
+		 * \param col the color of the box
+		 */
 		void drawBox(int tx, int ty, int tw, int th, u16 col=RGB15(0,0,0)|BIT(15));
+
+		/**
+		 * Draw a rectangular box (full).
+		 * \param tx x-coordinate of the upper left corner of the box
+         * \param ty y-coordinate of the upper left corner of the box
+         * \param tw width of the box
+         * \param th height of the box
+         * \param col the color of the box
+		 */
 		void drawFullBox(int tx, int ty, int tw, int th, u16 col);
+
+		/**
+		 * Draw a box outlining the Widget's border
+		 * \param col the color of the box
+		 */
 		void drawBorder(u16 col = RGB15(0,0,0)|BIT(15));
+
+		/**
+		 * Draw a horizontal line
+		 * \param tx the x-coordinate of the left end of the line
+		 * \param ty the y-coordinate of the left end of the line
+		 * \param length the length of the line
+		 * \param col the color of the line
+		 */
 		void drawHLine(int tx, int ty, int length, u16 col);
+
+		/**
+         * Draw a vertical line
+         * \param tx the x-coordinate of the upper end of the line
+         * \param ty the y-coordinate of the upper end of the line
+         * \param length the length of the line
+         * \param col the color of the line
+         */
 		void drawVLine(int tx, int ty, int length, u16 col);
+
+		/**
+		 * Draw a line of arbitrary direction
+		 * \param tx1 the x-coordinate of the beginning of the line
+		 * \param ty1 the y-coordinate of the beginning of the line
+		 * \param tx2 the x-coordinate of the end of the line
+		 * \param ty2 the y-coordinate of the end of the line
+		 * \param the color of the line
+		 */
 		void drawLine(int tx1, int ty1, int tx2, int ty2, u16 col);
+
+		/**
+		 * Draws one pixel.
+		 * \param tx the x-coordinate of the pixel
+		 * \param ty the y-coordinate of the pixel
+		 * \param col the color of the pixel
+		 */
 		void drawPixel(int tx, int ty, u16 col);
+
+		/**
+		 * Draws a color gradient.
+		 * \param gradient a vector of RGB15 color values that make up the gradient. This is usually a member of a Theme.
+		 * \param tx x-coordinate of the upper left corner of the gradient
+		 * \param ty y-coordinate of the upper left corner of the gradient
+		 * \param tw the width of the gradient
+		 * \param th the height of the gradient
+		 * \param reverse reverse the gradient
+		 */
 		void drawGradient(const std::vector<u16> &gradient, int tx, int ty, int tw, int th, bool reverse=false);
+
+		/**
+		 * Draws a monochrome icon. This is usually used for button-type Widgets.
+		 * \sa \ref icons
+		 * \param tx the x-coordinate of the upper left corner of the icon
+		 * \param ty the y-coordinate of the upper left corner of the icon
+		 * \param tw the width of the icon
+		 * \param th the height of the icon
+		 * \param icon a pointer to the icon
+		 */
 		void drawMonochromeIcon(int tx, int ty, int tw, int th, const u8 *icon);
 
 		// Stylus utility functions
+
+		/**
+		 * Check whether the pen is inside a rectangle. This is a utility function for widgets that have regions that do different things.
+		 * If you use this, you probably should be using a sub-widget, but TobKit won't call the cops on you if you don't.
+		 * \param x the x-position of the pen
+		 * \param y the y-position of the pen
+		 * \param x1 the x-coordinate of the upper left corner of the rectangle
+		 * \param y1 the y-coordinate of the upper left corner of the rectangle
+		 * \param x2 the x-coordinate of the lower right corner of the rectangle
+		 * \param y2 the y-coordinate of the lower right corner of the rectangle
+		 * \returns true if the pen is inside the rectangle, else false
+		 */
 		bool isInRect(int x, int y, int x1, int y1, int x2, int y2);
 
-		// How wide is the string when rendered?
+		/**
+		 * How wide is the string when rendered?
+		 * \param str the string
+		 * \param limit If specified, the string is internally shortened to have a length less or equal to limit before calculating it's length.
+		 */
 		int getStringWidth(const string &str, u16 limit=USHRT_MAX);
 
         /**
@@ -194,6 +325,9 @@ class Widget
          */
         virtual void setupTileBg(void) {};
 
+        /**
+         * Set up this Widget as an overlay Widget, i.e. a Widget that is on top of all other Widgets. Use this for dialog boxes, pop-up ads etc.
+         */
         void setOverlay(void);
 
 	private:
