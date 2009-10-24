@@ -34,13 +34,8 @@ BitButton::BitButton(WidgetManager *owner, const u8 *bitmap, int x, int y, int w
 	draw();
 }
 
-// Drawing request
-void BitButton::pleaseDraw(void) {
-	draw();
-}
-
 // Event calls
-void BitButton::penDown(u8 x, u8 y)
+void BitButton::penDown(int x, int y)
 {
 	if(!_enabled) {
 		return;
@@ -48,7 +43,7 @@ void BitButton::penDown(u8 x, u8 y)
 	_pen_is_down = true;
 	draw();
 }
-void BitButton::penUp(u8 x, u8 y)
+void BitButton::penUp()
 {
     _pen_is_down = false;
 	draw();

@@ -35,18 +35,48 @@ namespace TobKit
 class BitButton: public Widget
 {
 	public:
+        /**
+         * Creates a BitButton
+         * \param owner the GUI that the BitButton belongs to
+         * \param bitmap the image on the BitButton
+         * \param x x-position on the screen.
+         * \param y y-position on the screen
+         * \param width width of the BitButton
+         * \param height height of the BitButton
+         * \param bmpwidth width of the bitmap in pixels
+         * \param bmpheight height of the bitmap in pixels
+         * \param bmpx x-position of the bitmap on the BitButton
+         * \param bmpy y-position of the bitmap on the BitButton
+         * \param listening_buttons hardware buttons that activate the Button, ORed together, e.g. KEY_A | KEY_B
+         * \param visible if the BitButton is drawn and responds to input
+         */
 	    BitButton(WidgetManager *owner, const u8 *bitmap, int x, int y, int width=17, int height=17,
 	            u8 bmpwidth=13, u8 bmpheight=13, u8 bmpx=2, u8 bmpy=2, u16 listening_buttons=0, bool visible=true);
 
-		// Drawing request
-		void pleaseDraw(void);
+		/**
+         * The pen is put down on the Widget.
+         * This method is called by the GUI.
+         * You only need this method if you want to simulate the event manually.
+         */
+		void penDown(int x, int y);
 
-		// Event calls
-		void penDown(u8 x, u8 y);
-		void penUp(u8 x, u8 y);
+		/**
+         * The pen is lifted from the Widget.
+         * This method is called by the GUI.
+         * You only need this method if you want to simulate the event manually.
+         */
+		void penUp();
+
+		/**
+         * A (hardware) button that the (software) Button reacts to is pressed.
+         * This method is called by the GUI.
+         * You only need this method if you want to simulate the event manually.
+         */
 		void buttonPress(u16 button);
 
-        // Signals
+		/**
+         * This signal is emitted if the BitButton is pushed.
+         */
         sigc::signal<void> signal_pushed;
 
 	private:
