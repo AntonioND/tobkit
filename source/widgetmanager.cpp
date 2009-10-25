@@ -36,13 +36,13 @@ namespace TobKit {
 /* ===================== PUBLIC ===================== */
 
 WidgetManager::WidgetManager(Screen screen, GUI *gui, Theme theme)
-    :_screen(screen), _theme(new Theme(theme)), _bg_color(theme.col_bg), _text_color(theme.col_text), _active_widget(0), _overlay_widget(0)
+    :_screen(screen), _gui(gui), _theme(new Theme(theme)), _bg_color(theme.col_bg), _text_color(theme.col_text), _active_widget(0), _overlay_widget(0)
 {
 
 }
 
 WidgetManager::WidgetManager(Screen screen, GUI *gui, Theme theme, u16 bg_color, u16 text_color)
-    :_screen(screen), _theme(new Theme(theme)), _bg_color(bg_color), _text_color(text_color), _active_widget(0), _overlay_widget(0)
+    :_screen(screen), _gui(gui), _theme(new Theme(theme)), _bg_color(bg_color), _text_color(text_color), _active_widget(0), _overlay_widget(0)
 {
 
 }

@@ -24,9 +24,15 @@
 #include <nds.h>
 #include <vector>
 
+/**
+ * This is the color theme that defines the look of your app.
+ */
 class Theme
 {
 	public:
+        /**
+         * Creates the theme by initializing all colors and creating the gradients.
+         */
 		Theme();
 
 		u16 col_bg;
@@ -48,6 +54,12 @@ class Theme
 
 		std::vector<u16> gradient_ctrl, gradient_ctrl_disabled, gradient_bg, gradient_bg_bright; // Precalculated gradients for quickly drawing nice buttons
 	private:
+		/**
+		 * Calculate a gradient between two colors
+		 * \param gradient a pointer to the gradient to fill
+		 * \param col1 the first color as an RGB15
+		 * \param col2 the second color as an RGB15
+		 */
 		void precalcGradient(std::vector<u16> *gradient, const u16 col1, const u16 col2);
 };
 

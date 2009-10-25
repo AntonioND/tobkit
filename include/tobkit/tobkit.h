@@ -64,6 +64,7 @@
  *  \section more More Info
  *  - \ref interop
  *  - \ref icons
+ *  - \ref ownwidgets
  */
 
 /*! \page interop Integrating TobKit into your project
@@ -167,6 +168,10 @@
  *
  * Take a look at fontchars.h and fontchars.cpp and modify them to fit your font. This is the part that's quite a hassle: You need to specify the width of each character in the source file!
  * After that, you can enjoy TobKit with your custom font!
+ */
+
+/*! \page ownwidgets Creating your own TobKit widgets
+ * TODO , maybe a short example
  */
 
 #include <tobkit/gui.h>

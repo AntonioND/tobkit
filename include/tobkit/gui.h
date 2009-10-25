@@ -38,6 +38,10 @@ class Widget;
 
 /**
  * \brief This is the user interface class that manages widgets and input and deals with the DS graphics hardware.
+ * In order to use TobKit you just need to get an instance of this class and then you can start coding.
+ * Since this class is a doubleton(TM), you don't use the constructor to create it but the instance() function.
+ * Example usage: \code GUI *gui_main = GUI::instance(MAIN_SCREEN); \endcode
+ * Most of the member functions of this class should only be used when you implement your own Widget.
  */
 class GUI: public WidgetManager
 {
@@ -45,10 +49,15 @@ class GUI: public WidgetManager
 	friend class WidgetManager;
 
 	public:
-	    // This class is a doubleton(TM)
-	    static GUI* instance(Screen screen);
-	    static GUI* init(Screen screen, Theme *theme, bool double_buffer=false, u16 *vram=NULL);
-	    static GUI* init(Screen screen, bool double_buffer=false, u16 *vram=NULL);
+	    /**
+	     * Get an instance of the GUI for a particular screen with some custom settings.
+	     * \param screen the \ref Screen that this GUI manages.
+	     * \param theme the Theme for the GUI. If set to NULL, the default Theme will be used
+	     * \param double_buffer whether to use double buffering. You typically want double buffering if you want to play back animations that need to be smooth. You know that you need double buffering when your animations flicker.
+	     * \param vram lets you specify a custom vram pointer. If specified, TobKit will assume you are so smart to have set up video yourself and will not attempt to do so.
+	     * \param vram_back is necessary if you set double_buffer to true. It's a pointer to the VRAM back buffer.
+	     */
+	    static GUI* instance(Screen screen, Theme *theme=NULL, bool double_buffer=false);
 
 		virtual ~GUI();
 
@@ -65,7 +74,7 @@ class GUI: public WidgetManager
 
         /**
          * Allocates a tile background to be used for tile-based graphics. It is
-         * used internally by some widgets like the keyboard that depend on tiles.
+         * used internally by some widgets like the Keyboard that depend on tiles.
          * You only need this function if you want to implement a tile-based widget.
          *
          * <b>Interoperability note:</b> This function allocates the highest available text background
@@ -85,7 +94,12 @@ class GUI: public WidgetManager
         bool addTileBackground(Widget* widget, int tileset_size, u16 **tile_ram,
                 int map_size, u16 **map_ram, int *layer=NULL, int *handle=NULL);
 
-        void delTileBackground(Widget *widget);
+        /**
+         * Frees the background associated with a given widget (if there is one)
+         * \param widget the Widget whose tile background you want to free. Since this function is used from within your Widget's implementation, you just pass "this"
+         * \returns whether a tile background was deleted. Use the return value for checking and then throwing incomprehensible errors at the user.
+         */
+        bool delTileBackground(Widget *widget);
 
         /**
          * Allocate a 16-color palette.
@@ -105,7 +119,7 @@ class GUI: public WidgetManager
         void delPalette(int palette_index);
 
         /**
-         * Gets the amount of free VRAM for a screen. VRAM is allocated from back to front, i.e. the value returned is
+         * Gets the amount of free VRAM for a screen in kilobytes. VRAM is allocated from back to front, i.e. the value returned is
          * the amount of continuously available RAM at the beginning of VRAM. Use this function if you want to use some
          * of the VRAM for yourself to check if there is enough free VRAM available. It is recommended that you allocate
          * VRAM using addTileBackground(), so TobKit can keep track of the free VRAM and won't overwrite your stuff.
@@ -114,8 +128,10 @@ class GUI: public WidgetManager
          */
         u32 getFreeVramKB();
 
-		// Swap buffers when in double-buffering mode
-            void swapBuffers(void);
+		/**
+		 * Swap buffers when in double-buffering mode
+		 */
+        void swapBuffers(void);
 
 	private:
 	    static GUI *instance_main, *instance_sub;
@@ -124,8 +140,6 @@ class GUI: public WidgetManager
 	    static const int N_AVAILABLE_TEXT_BGS_SUB = 2;
 
 		std::vector<Widget*> _tile_widgets; // Keep track of widgets using tile BGs
-
-		Screen _screen;
 
 		u16 *_vram_front, *_vram; // in double-buffered mode, _vram is the backbuffer
 
@@ -140,25 +154,15 @@ class GUI: public WidgetManager
 		// hardware video layers
 		int _bmp_bg;
 
-		/**
-         * The default constructor. In 99.9% of situations you use this constructor
-         * to create a GUI.
-         */
-        GUI(Screen screen, bool double_buffer=false, u16 *vram=NULL);
-
         /**
-         * The custom consructor that lets you specify stuff yourself.
-         * Situations in which you might want to use this one:
-         * - You create a custom Widget with some sub-widgets.
-         * - You want to manage VRAM yourself.
+         * Situations in which you should use this constructor:
+         * - never! (That's why it's private)
+         * Use instance() instead!
+         * \param screen the screen that the GUI manages
          * \param theme the color thema for all Widgets in this GUI
-         * \param the background color (needed for semi-transparent Widgets)
-         * \param main_vram a pointer to the DS's main VRAM
-         * \param sub_vram a pointer to the DS's sub VRAM
+         * \param double_buffer whether to use double buffering
          */
-        GUI(Screen screen, Theme *theme, bool double_buffer=false, u16 *vram=NULL);
-
-		void setup();
+        GUI(Screen screen, Theme *theme = NULL, bool double_buffer=false);
 
 		/**
 		 * Sets up the display.
@@ -174,7 +178,6 @@ class GUI: public WidgetManager
 		 * doing animations or stuff that renders slowly. To use double-buffering, call
 		 * draw() before the vblank and swapBuffers() after the vblank.
 		 */
-
 		void setupVideo(bool double_buffer=false);
 
 		void clearScreen();

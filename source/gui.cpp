@@ -27,29 +27,14 @@
 namespace TobKit
 {
 
-GUI* GUI::instance(Screen screen)
-{
-    if(screen == MAIN_SCREEN) {
-        if(instance_main == NULL) {
-            instance_main = new GUI(screen);
-        }
-        return instance_main;
-    } else {
-        if(instance_sub == NULL) {
-            instance_sub = new GUI(screen);
-        }
-        return instance_sub;
-    }
-}
-
-GUI* GUI::init(Screen screen, Theme *theme, bool double_buffer, u16 *vram)
+GUI* GUI::instance(Screen screen, Theme *theme, bool double_buffer)
 {
     if(screen == MAIN_SCREEN) {
         if(instance_main == NULL) {
             if(theme == NULL) {
                 theme = new Theme();
             }
-            instance_main = new GUI(screen, theme, double_buffer, vram);
+            instance_main = new GUI(screen, theme, double_buffer);
         }
         return instance_main;
     } else {
@@ -57,15 +42,10 @@ GUI* GUI::init(Screen screen, Theme *theme, bool double_buffer, u16 *vram)
             theme = new Theme();
         }
         if(instance_sub == NULL) {
-            instance_sub = new GUI(screen, theme, double_buffer, vram);
+            instance_sub = new GUI(screen, theme, double_buffer);
         }
         return instance_sub;
     }
-}
-
-GUI* GUI::init(Screen screen, bool double_buffer, u16 *vram)
-{
-    return init(screen, NULL, double_buffer, vram);
 }
 
 GUI::~GUI()
@@ -251,9 +231,8 @@ bool GUI::addTileBackground(Widget* widget, int tileset_size, u16 **tile_ram,
     return true;
 }
 
-void GUI::delTileBackground(Widget *widget)
+bool GUI::delTileBackground(Widget *widget)
 {
-    // Free the background associated with the widget (if there is one)
     std::vector<Widget*>::iterator w_it = std::find(_tile_widgets.begin(), _tile_widgets.end(), widget);
     if (w_it != _tile_widgets.end()) {
         _tile_widgets.erase(w_it);
@@ -273,6 +252,9 @@ void GUI::delTileBackground(Widget *widget)
             tile_widgets_tmp[i]->setupTileBg();
             tile_widgets_tmp[i]->pleaseDraw();
         }
+        return true;
+    } else {
+        return false;
     }
 }
 
@@ -281,38 +263,27 @@ void GUI::delTileBackground(Widget *widget)
 GUI* GUI::instance_main = 0;
 GUI* GUI::instance_sub = 0;
 
-GUI::GUI(Screen screen, bool double_buffer, u16 *vram)
+GUI::GUI(Screen screen, Theme *theme, bool double_buffer)
     :WidgetManager(screen, this, Theme()),
-    _screen(screen), _vram(vram)
+    _vram(0), // vram will be initialised in setupVideo
+    _double_buffering(double_buffer), _active_buffer(1), _free_palettes(16), _flag_used_palettes(0)
 {
-    _gui = this;
-    setup();
-    setupVideo(double_buffer);
-}
-
-GUI::GUI(Screen screen, Theme *theme, bool double_buffer, u16 *vram)
-    :WidgetManager(screen, this, Theme(*theme)),
-    _screen(screen), _vram(vram)
-{
-    setup();
-    setupVideo(double_buffer);
-}
-
-void GUI::setup()
-{
-    _double_buffering = false;
-    _active_buffer = 1;
-    _free_palettes = 16;
     if(_screen == MAIN_SCREEN) {
         _free_text_bgs = N_AVAILABLE_TEXT_BGS_MAIN;
     } else {
         _free_text_bgs = N_AVAILABLE_TEXT_BGS_SUB;
     }
-    _flag_used_palettes = 0;
 
     for(u8 i=0;i<14;++i) {
         _shortcuts.push_back(0);
     }
+
+    setupVideo(double_buffer);
+}
+
+void GUI::setup()
+{
+
 }
 
 void GUI::setupVideo(bool double_buffer)

@@ -18,11 +18,19 @@
  * <http://www.gnu.org/licenses/>.
  */
 
+
+/** \file constants.h
+ * This file defines global TobKit constants.
+ */
+
 #ifndef CONSTANTS_H_
 #define CONSTANTS_H_
 
 namespace TobKit
 {
+    /** \enum Screen
+     * Enumerates the DS's screens. Note that this refers to the display engines (main and sub engine) not the LCD screens they are mapped to.
+     */
 	enum Screen {MAIN_SCREEN, SUB_SCREEN};
 };
 
