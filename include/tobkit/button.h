@@ -76,6 +76,7 @@ class Button: public Widget
 
         /*
          * Change the Button's caption
+         * \param caption the new caption.
          */
         void setCaption(const string &caption);
 

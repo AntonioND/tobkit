@@ -281,11 +281,6 @@ GUI::GUI(Screen screen, Theme *theme, bool double_buffer)
     setupVideo(double_buffer);
 }
 
-void GUI::setup()
-{
-
-}
-
 void GUI::setupVideo(bool double_buffer)
 {
     // Double-buffering works only on the main screen

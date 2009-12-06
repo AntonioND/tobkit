@@ -37,7 +37,7 @@ Label::Label(WidgetManager *owner, const string &caption, int x, int y,
     _caption(caption), _has_border(has_border)
 {
     if(width == -1) {
-        _width = getStringWidth(_caption) + 2;
+        _width = getStringWidth(_caption) + 3;
     }
     if(height == -1) {
         _height = 14;
@@ -59,7 +59,7 @@ void Label::pleaseDraw(void) {
 }
 
 // Event calls
-void Label::penDown(u8 x, u8 y)
+void Label::penDown(int x, int y)
 {
 	signal_pushed();
 }
