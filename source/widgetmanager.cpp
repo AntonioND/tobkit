@@ -116,13 +116,15 @@ void WidgetManager::penDown(int x, int y)
 
     if(w!=0) {
         _active_widget = w;
-        w->penDown(x, y);
+        if(w->isEnabled()) {
+            w->penDown(x, y);
+        }
     }
 }
 
 void WidgetManager::penUp()
 {
-    if(_active_widget!=0) {
+    if(_active_widget != 0) {
         if(_active_widget->isVisible()==true) {
             _active_widget->penUp();
             _active_widget = 0;
@@ -132,7 +134,7 @@ void WidgetManager::penUp()
 
 void WidgetManager::penMove(int x, int y)
 {
-    if(_active_widget!=0) {
+    if(_active_widget != 0) {
         _active_widget->penMove(x, y);
     }
 }

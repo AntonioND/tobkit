@@ -21,34 +21,61 @@
 #ifndef _CHECKBOX_H_
 #define _CHECKBOX_H_
 
-#include "widget.h"
+#include "tobkit/widget.h"
 
+#include <string>
+
+namespace TobKit{
+
+/**
+ * A checkable box with a label next to it.
+ * \image html todo.png
+ */
 class CheckBox: public Widget
 {
 	public:
-		CheckBox(u8 _x, u8 _y, u8 _width, u8 _height, u16 **_vram,
-			 bool _visible=true, bool checked=false, bool albino=false);
+        /**
+         * Creates a CheckBox. This is only called from the constructors of subclasses.
+         * \param x x-position on the screen.
+         * \param y y-position on the screen
+         * \param width width of the Widget
+         * \param height height of the Widget
+         * \param owner the GUI that the Widget belongs to
+         * \param listening_buttons hardware buttons that activate the Button, ORed together, e.g. KEY_A | KEY_B
+         * \param visible if the Widget is drawn and responds to input
+         */
+        CheckBox(WidgetManager *owner, string caption, int x, int y, bool checked=false, int width=-1, int height=-1,
+                bool visible=true, u16 listening_buttons=0);
 		~CheckBox();
 		
-		void setCaption(const char *_label);
-		void setChecked(bool checked_);
+		/**
+		 * Change the CheckBox's caption
+         * \param caption the new caption.
+		 */
+		void setCaption(string caption);
 		
-		// Drawing request
-		void pleaseDraw(void);
+		/**
+		 * Sets the checked state.
+		 * \param checked whether the CheckBox is checked
+		 */
+		void setChecked(bool checked);
 		
-		// Event calls
-		void penDown(u8 px, u8 py);
+        /**
+         * The pen is put down on the Widget.
+         * This method is called by the GUI.
+         * You only need this method if you want to simulate the event manually.
+         */
+        void penDown(int x, int y);
 		
-		void registerToggleCallback(void (*onToggle_)(bool));
-		
+        sigc::signal<void, bool> signal_pushed;
+
 	private:
-		char *label;
-		bool checked;
-		bool albino; // different color setting for dark bg
-		
-		void (*onToggle)(bool);
-		
-		void draw(void);
+        void draw(void);
+
+		std::string _caption;
+		bool _checked;
+};
+
 };
 
 #endif

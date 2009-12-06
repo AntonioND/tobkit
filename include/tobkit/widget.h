@@ -153,7 +153,8 @@ class Widget
 		bool _enabled;
 		u16 **_vram;
 		Theme *_theme;
-		u16 _bgcolor, _textcolor; // Color of the background (for hiding the widget)
+		u16 _bgcolor; // Color of the background (for hiding the widget)
+		u16 _textcolor; // Color of text (can be changed eg. if on a dark background)
 
 		/**
 		 * This is called to notify the widget that the pen was put down.

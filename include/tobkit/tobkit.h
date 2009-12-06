@@ -179,7 +179,7 @@
 #include <tobkit/bitbutton.h>
 #include <tobkit/button.h>
 #include <tobkit/scrollthingy.h>
-//#include <tobkit/checkbox.h>
+#include <tobkit/checkbox.h>
 //#include <tobkit/fileselector.h>
 //#include <tobkit/fontchars.h>
 //#include <tobkit/groupbox.h>
