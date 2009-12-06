@@ -180,6 +180,9 @@ class GUI: public WidgetManager
 		 */
 		void setupVideo(bool double_buffer=false);
 
+		/**
+		 * Clears the screen by filling it with the Theme's background color.
+		 */
 		void clearScreen();
 
 };

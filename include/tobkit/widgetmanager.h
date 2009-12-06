@@ -116,30 +116,68 @@ class WidgetManager {
         void buttonRelease(u16 buttons);
 
     protected:
+        /**
+         * Draw all Widgets.
+         */
         void draw(void);
 
-        // Show/Hide all elements
+        /**
+         * Show all Widgets.
+         */
         void showAll(void);
+
+        /**
+         * Hide all Widgets.
+         */
         void hideAll(void);
 
+        /**
+         * Mark all Widgets as occluded.
+         */
         void occludeAll(void);
+
+        /**
+         * Mark all Widgets as not occluded.
+         */
         void revealAll(void);
 
-        // Adds a widget and specifies which hardware buttons it listens to
+        /**
+         * Adds a widget and specifies which hardware buttons it listens to
+         * \param w a pointer to the widget to add
+         * \param listeningButtons the hardware buttons it listens to, ORed together
+         */
         void addWidget(Widget *w, u16 listeningButtons = 0);
 
-        // Removes a widget from the GUI
+        /**
+         * Removes a widget from the GUI
+         * \param w the Widget to remove.
+         */
         void removeWidget(Widget *w);
 
-        // Registers a widget that is in top of all other widgets and has input
-        // priority, like a popup-window
+        /**
+         * Registers a widget that is in top of all other widgets and has input priority, like a popup-window.
+         * \param w the Widget that you want to make the overlay Widget.
+         */
         void setOverlayWidget(Widget *w);
 
-        // Remove the overlay widget
+        /**
+         * Remove the overlay widget
+         */
         void removeOverlayWidget();
 
-        // Find the widget that got hit
+        /**
+         * Find the widget that got hit by the pen
+         * \param x the pen's x-coordinate.
+         * \param y the pen's y-coordinate.
+         * \returns the Widget that got hit, or NULL if no Widget got hit.
+         */
         Widget *getWidgetAt(int x, int y);
+
+        /**
+         * Get the widget that listens to hardware buttons
+         * \param The ORed together hardware buttons you want to check
+         * \returns the Widget that listens to them. If there are multiple results, just one of them will be returned, so take care that your Widgets listen to different buttons.
+         */
         Widget *getWidgetForButtons(u16 buttons);
 
         Screen _screen;
