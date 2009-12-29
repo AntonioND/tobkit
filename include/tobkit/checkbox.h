@@ -35,18 +35,20 @@ class CheckBox: public Widget
 {
 	public:
         /**
-         * Creates a CheckBox. This is only called from the constructors of subclasses.
+         * Creates a CheckBox.
+         * \param owner the GUI that the Widget belongs to
+         * \param caption the text on the CheckBox
          * \param x x-position on the screen.
          * \param y y-position on the screen
-         * \param width width of the Widget
-         * \param height height of the Widget
-         * \param owner the GUI that the Widget belongs to
+         * \param checked whether or not it's checked
+         * \param width how many pixels it's wide
+         * \param height how many pixels it's high
          * \param visible if the Widget is drawn and responds to input
-         * \param albino whether the Widget is bright on a dark background
          * \param listening_buttons hardware buttons that activate the Button, ORed together, e.g. KEY_A | KEY_B
          */
         CheckBox(WidgetManager *owner, string caption, int x, int y, bool checked=false, int width=-1, int height=-1,
                 bool visible=true, u16 listening_buttons=0);
+
 		~CheckBox();
 		
 		/**
@@ -67,7 +69,10 @@ class CheckBox: public Widget
          * You only need this method if you want to simulate the event manually.
          */
         void penDown(int x, int y);
-		
+
+        /**
+         * Signals when the CheckBox is pushed.
+         */
         sigc::signal<void, bool> signal_pushed;
 
 	private:
