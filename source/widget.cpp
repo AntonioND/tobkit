@@ -345,13 +345,13 @@ int Widget::getStringWidth(const string &str, u16 limit)
 	return res;
 }
 
-void Widget::drawMonochromeIcon(int tx, int ty, int tw, int th, const u8 *icon)
+void Widget::drawMonochromeIcon(int tx, int ty, int tw, int th, const u8 *icon, u16 color)
 {
 	for(int j=0;j<th;++j) {
 		for(int i=0;i<tw;++i) {
 			u16 pixelidx = tw*j+i;
 			if(icon[pixelidx/8] & BIT(pixelidx%8) ) {
-				(*_vram)[SCREEN_WIDTH*(_y+ty+j)+_x+tx+i] = RGB15(0,0,0)|BIT(15);
+				(*_vram)[SCREEN_WIDTH*(_y+ty+j)+_x+tx+i] = color;
 			}
 		}
 	}

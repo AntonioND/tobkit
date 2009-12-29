@@ -289,8 +289,9 @@ class Widget
 		 * \param tw the width of the icon
 		 * \param th the height of the icon
 		 * \param icon a pointer to the icon
+		 * \param color the color of the icon, default black
 		 */
-		void drawMonochromeIcon(int tx, int ty, int tw, int th, const u8 *icon);
+		void drawMonochromeIcon(int tx, int ty, int tw, int th, const u8 *icon, u16 color=RGB15(0,0,0)|BIT(15));
 
 		// Stylus utility functions
 
