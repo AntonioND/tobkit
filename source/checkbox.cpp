@@ -33,9 +33,9 @@ namespace TobKit {
 /* ===================== PUBLIC ===================== */
 
 CheckBox::CheckBox(WidgetManager *owner, string caption, int x, int y, bool checked, int width, int height,
-        bool visible, u16 listening_buttons)
+        bool visible, bool albino, u16 listening_buttons)
     :Widget(x, y, width, height, owner, listening_buttons, visible),
-     _caption(caption), _checked(checked)
+     _caption(caption), _checked(checked), _albino(albino)
 {
     if(width == -1) {
         _width = getStringWidth(_caption) + 13;
@@ -85,12 +85,14 @@ void CheckBox::draw(void)
 	// Clear up
 	drawFullBox(0, 0, 11, 3, _bgcolor);
 	
+	u16 col = _albino ? _textcolor : _theme->col_lighter_bg;
+
 	// Checked or not
 	if(_checked)
 		drawMonochromeIcon(1, 0, 10, 10, haken_raw);
 	
 	// Text
-	drawString(_caption, 13, 2, 255, _textcolor);
+	drawString(_caption, 13, 2, 255, col);
 }
 
 };

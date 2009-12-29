@@ -41,11 +41,12 @@ class CheckBox: public Widget
          * \param width width of the Widget
          * \param height height of the Widget
          * \param owner the GUI that the Widget belongs to
-         * \param listening_buttons hardware buttons that activate the Button, ORed together, e.g. KEY_A | KEY_B
          * \param visible if the Widget is drawn and responds to input
+         * \param albino whether the Widget is bright on a dark background
+         * \param listening_buttons hardware buttons that activate the Button, ORed together, e.g. KEY_A | KEY_B
          */
         CheckBox(WidgetManager *owner, string caption, int x, int y, bool checked=false, int width=-1, int height=-1,
-                bool visible=true, u16 listening_buttons=0);
+                bool visible=true, bool albino=false, u16 listening_buttons=0);
 		~CheckBox();
 		
 		/**
@@ -74,6 +75,7 @@ class CheckBox: public Widget
 
 		std::string _caption;
 		bool _checked;
+		bool _albino;
 };
 
 };
