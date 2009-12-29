@@ -29,7 +29,7 @@ namespace TobKit{
 
 /**
  * A checkable box with a label next to it.
- * \image html todo.png
+ * \image html checkbox.png
  */
 class CheckBox: public Widget
 {
@@ -46,7 +46,7 @@ class CheckBox: public Widget
          * \param listening_buttons hardware buttons that activate the Button, ORed together, e.g. KEY_A | KEY_B
          */
         CheckBox(WidgetManager *owner, string caption, int x, int y, bool checked=false, int width=-1, int height=-1,
-                bool visible=true, bool albino=false, u16 listening_buttons=0);
+                bool visible=true, u16 listening_buttons=0);
 		~CheckBox();
 		
 		/**
@@ -75,7 +75,6 @@ class CheckBox: public Widget
 
 		std::string _caption;
 		bool _checked;
-		bool _albino;
 };
 
 };

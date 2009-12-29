@@ -182,7 +182,7 @@
 #include <tobkit/checkbox.h>
 //#include <tobkit/fileselector.h>
 //#include <tobkit/fontchars.h>
-//#include <tobkit/groupbox.h>
+#include <tobkit/groupbox.h>
 //#include <tobkit/htabbox.h>
 //#include <tobkit/keyb_hit.h>
 #include <tobkit/keyboard.h>

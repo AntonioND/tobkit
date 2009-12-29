@@ -42,6 +42,8 @@ namespace TobKit
 class WidgetManager;
 class GUI;
 
+
+
 /**
  * \brief The base class for all TobKit Widgets. Handles input and provides a lot of useful drawing functions.
  */

@@ -35,8 +35,9 @@ namespace TobKit {
 
 /* ===================== PUBLIC ===================== */
 
-WidgetManager::WidgetManager(Screen screen, GUI *gui, Theme theme)
-    :_screen(screen), _gui(gui), _theme(new Theme(theme)), _bg_color(theme.col_bg), _text_color(theme.col_text), _active_widget(0), _overlay_widget(0)
+WidgetManager::WidgetManager(Screen screen, GUI *gui, Theme theme, bool dark_bg)
+    :_screen(screen), _gui(gui), _theme(new Theme(theme)), _bg_color(theme.col_bg), _text_color(theme.col_text), _active_widget(0), _overlay_widget(0),
+     _dark_bg(dark_bg)
 {
 
 }

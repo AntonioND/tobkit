@@ -24,6 +24,7 @@
 #include <string>
 
 #include "tobkit/checkbox.h"
+#include "tobkit/gui.h"
 #include "haken_raw.h"
 
 using namespace std;
@@ -33,9 +34,9 @@ namespace TobKit {
 /* ===================== PUBLIC ===================== */
 
 CheckBox::CheckBox(WidgetManager *owner, string caption, int x, int y, bool checked, int width, int height,
-        bool visible, bool albino, u16 listening_buttons)
+        bool visible, u16 listening_buttons)
     :Widget(x, y, width, height, owner, listening_buttons, visible),
-     _caption(caption), _checked(checked), _albino(albino)
+     _caption(caption), _checked(checked)
 {
     if(width == -1) {
         _width = getStringWidth(_caption) + 13;
@@ -85,7 +86,7 @@ void CheckBox::draw(void)
 	// Clear up
 	drawFullBox(0, 0, 11, 3, _bgcolor);
 	
-	u16 col = _albino ? _textcolor : _theme->col_lighter_bg;
+	u16 col = _owner->hasDarkBG() ? _theme->col_lighter_bg : _textcolor;
 
 	// Checked or not
 	if(_checked)

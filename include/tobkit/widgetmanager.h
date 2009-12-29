@@ -54,7 +54,7 @@ class WidgetManager {
          * \param gui a pointer to the GUI object
          * \param theme the Theme that all Widgets managed by this WidgetManager will have
          */
-        WidgetManager(Screen screen, GUI *gui, Theme theme);
+        WidgetManager(Screen screen, GUI *gui, Theme theme, bool dark_bg=true);
 
         /**
          * This constructor is used to override bg_color and text_color. This is necessary for Widgets that
@@ -114,6 +114,12 @@ class WidgetManager {
          * You only need this method if you want to simulate the event manually.
          */
         void buttonRelease(u16 buttons);
+
+        /**
+         * Is the background on which Widgets are drawn dark (affects Widget color)
+         * \return true if the background is dark, false if it is white
+         */
+        bool hasDarkBG() {return _dark_bg;}
 
     protected:
         /**
@@ -180,6 +186,8 @@ class WidgetManager {
          */
         Widget *getWidgetForButtons(u16 buttons);
 
+
+
         Screen _screen;
         GUI *_gui;
         Theme *_theme;
@@ -189,6 +197,7 @@ class WidgetManager {
         std::vector<Widget*> _shortcuts;
         Widget *_active_widget;
         Widget *_overlay_widget;
+        bool _dark_bg;
 };
 
 };

@@ -21,22 +21,42 @@
 #ifndef _GROUPBOX_H_
 #define _GROUPBOX_H_
 
-#include "widget.h"
+#include "tobkit/widget.h"
 
+namespace TobKit
+{
+
+/** \brief A box that groups several Widgets together (purely visually).
+ * \image html todo.png
+ */
 class GroupBox: public Widget
 {
 	public:
-		GroupBox(u8 _x, u8 _y, u8 _width, u8 _height, u16 **_vram, bool _visible=true);
+        /**
+         * Creates a GroupBox
+         * \param owner the GUI that the Widget belongs to
+         * \param caption the text on the Widget
+         * \param x x-position on the screen.
+         * \param y y-position on the screen
+         * \param width width of the Widget
+         * \param height height of the Widget
+         * \param visible if the Widget is drawn and responds to input
+         */
+		GroupBox(WidgetManager *owner, const string &caption, int x, int y, int width, int height, bool visible=true);
 		~GroupBox();
 		
-		void pleaseDraw(void);
-		
-		void setText(const char *text);
+		/**
+		 * Sets the caption of the GroupBox
+		 * \param caption the new caption
+		 */
+		void setCaption(const string &caption);
 		
 	private:
-		char *text;
+		string _caption;
 		
 		void draw(void);
+};
+
 };
 
 #endif
