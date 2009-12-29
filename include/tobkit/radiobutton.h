@@ -21,45 +21,101 @@
 #ifndef RADIOBUTTON_H
 #define RADIOBUTTON_H
 
-#include "widget.h"
+#include "tobkit/widget.h"
+
 #include <stdio.h>
 #include <vector>
 
+namespace TobKit {
+
+/** \brief Lets the user chose one of several alternative options.
+ * RadioButtons that show alternative choices members of the same RadioButtonGroup.
+ * \image html radiobutton.png
+ */
 class RadioButton: public Widget {
 	public:
+
+        /** \brief The RadioButtonGroup makes sure that only one of the RadioButtons in it is selected at the same time.
+         * Listen to the RadioButtonGroup's change signal to know when the selected RadioButton changes.
+         */
 		class RadioButtonGroup {
 			public:
+                /**
+                 * Creates a RadioButtonGroup
+                 */
 				RadioButtonGroup();
 				
+				/**
+				 * Add a RadioButton to the group.
+				 * \param rb the RadioButton to be added
+				 */
 				void add(RadioButton *rb);
-				void pushed(RadioButton *rb);
-				void setActive(u8 idx);
-				void registerChangeCallback(void (*onChange_)(u8));
+
+				/**
+				 * Sets a RadioButton as checked (by its pointer).
+				 * \param rb the RadioButton to be checked.
+				 */
+				void setChecked(RadioButton *rb);
+
+				/**
+                 * Sets a RadioButton as checked (by its index, in the order the RadioButtons were added).
+                 * \param rb the index of the RadioButton to be checked.
+                 */
+				void setChecked(int idx);
 	
+				/**
+				 * Get the index of the checked RadioButton (in the order they were added).
+				 * \return the index of the checked RadioButton.
+				 */
+				int getChecked();
+
+				sigc::signal<void, int> signal_changed;
+
 			private:
-				std::vector<RadioButton*> rbvec;
-				void (*onChange)(u8);
+				std::vector<RadioButton*> _rbvec;
 		};
 		
-		RadioButton(u8 _x, u8 _y, u8 _width, u8 _height, u16 **_vram,
-				RadioButtonGroup *_rbg, bool _visible=true);
+        /**
+         * Creates a RadioButton. Before you do that, make a RadioButtonGroup that the RadioButton should belong to.
+         * \param owner the GUI that the Button belongs to
+         * \param caption the text on he RadioButton
+         * \param x x-position on the screen.
+         * \param y y-position on the screen
+         * \param rgb the RadioButtonGroup that the RadioButton should belong to
+         * \param width how many pixels it's wide. -1 means choose automatically.
+         * \param height how many pixels it's high. -1 means choose automatically.
+         * \param visible if the Widget is drawn and responds to input
+         */
+		RadioButton(WidgetManager *owner, string caption, int x, int y,
+				RadioButtonGroup *rbg, int width=-1, int height=-1, bool visible=true);
 		
-		// Drawing request
-		void pleaseDraw(void);
+		/**
+         * The pen is put down on the Widget.
+         * This method is called by the GUI.
+         * You only need this method if you want to simulate the event manually.
+         */
+		void penDown(int x, int y);
 		
-		// Event calls
-		void penDown(u8 px, u8 py);
-		
-		void setCaption(const char *caption);
-		void setActive(bool _active);
-		bool getActive(void);
+		/**
+		 * Change the caption
+         * \param caption the new caption.
+		 */
+		void setCaption(const string &caption);
 		
 	private:
+		/**
+		 * Set the RadioButton to checked or unchecked
+		 * \param active true if you want it checked, else false
+		 */
+		void setChecked(bool active);
+
 		void draw(void);
 	
-		RadioButtonGroup *rbg;
-		bool active;
-		const char *label;
+		RadioButtonGroup *_rbg;
+		bool _active;
+		string _label;
+};
+
 };
 
 #endif
