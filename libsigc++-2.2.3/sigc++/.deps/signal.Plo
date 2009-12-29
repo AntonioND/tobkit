@@ -1,0 +1,116 @@
+signal.lo: signal.cc ../sigc++/signal.h \
+ /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/list \
+ /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_algobase.h \
+ /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/c++config.h \
+ /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/os_defines.h \
+ /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/cpu_defines.h \
+ /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/cstddef \
+ /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/include/stddef.h \
+ /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/functexcept.h \
+ /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/exception_defines.h \
+ /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/cpp_type_traits.h \
+ /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/ext/type_traits.h \
+ /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/ext/numeric_traits.h \
+ /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_pair.h \
+ /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/move.h \
+ /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/concept_check.h \
+ /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_iterator_base_types.h \
+ /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_iterator_base_funcs.h \
+ /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_iterator.h \
+ /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/debug/debug.h \
+ /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/allocator.h \
+ /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/c++allocator.h \
+ /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/ext/new_allocator.h \
+ /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/new \
+ /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/exception \
+ /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_list.h \
+ /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/initializer_list \
+ /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/list.tcc \
+ ../sigc++/signal_base.h ../sigc++config.h ../sigc++/type_traits.h \
+ ../sigc++/trackable.h ../sigc++/functors/slot.h ../sigc++/visit_each.h \
+ ../sigc++/adaptors/adaptor_trait.h ../sigc++/functors/functor_trait.h \
+ ../sigc++/functors/ptr_fun.h ../sigc++/functors/mem_fun.h \
+ ../sigc++/limit_reference.h ../sigc++/adaptors/deduce_result_type.h \
+ ../sigc++/functors/slot_base.h
+
+../sigc++/signal.h:
+
+/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/list:
+
+/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_algobase.h:
+
+/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/c++config.h:
+
+/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/os_defines.h:
+
+/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/cpu_defines.h:
+
+/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/cstddef:
+
+/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/include/stddef.h:
+
+/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/functexcept.h:
+
+/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/exception_defines.h:
+
+/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/cpp_type_traits.h:
+
+/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/ext/type_traits.h:
+
+/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/ext/numeric_traits.h:
+
+/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_pair.h:
+
+/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/move.h:
+
+/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/concept_check.h:
+
+/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_iterator_base_types.h:
+
+/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_iterator_base_funcs.h:
+
+/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_iterator.h:
+
+/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/debug/debug.h:
+
+/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/allocator.h:
+
+/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/c++allocator.h:
+
+/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/ext/new_allocator.h:
+
+/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/new:
+
+/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/exception:
+
+/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_list.h:
+
+/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/initializer_list:
+
+/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/list.tcc:
+
+../sigc++/signal_base.h:
+
+../sigc++config.h:
+
+../sigc++/type_traits.h:
+
+../sigc++/trackable.h:
+
+../sigc++/functors/slot.h:
+
+../sigc++/visit_each.h:
+
+../sigc++/adaptors/adaptor_trait.h:
+
+../sigc++/functors/functor_trait.h:
+
+../sigc++/functors/ptr_fun.h:
+
+../sigc++/functors/mem_fun.h:
+
+../sigc++/limit_reference.h:
+
+../sigc++/adaptors/deduce_result_type.h:
+
+../sigc++/functors/slot_base.h:
