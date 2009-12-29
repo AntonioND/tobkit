@@ -1,4 +1,4 @@
-prefix=/opt/devkitpro/libsigc++-2.2.3
+prefix=/home/tob/coding/dsdev/tob/tobkit/tobkit_new/libsigc++
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include

@@ -50,13 +50,13 @@ available_tags=" CXX"
 SHELL="/bin/bash"
 
 # Whether or not to build shared libraries.
-build_libtool_libs=yes
+build_libtool_libs=no
 
 # Whether or not to build static libraries.
 build_old_libs=yes
 
 # Whether or not to add -lc for building shared libraries.
-build_libtool_need_lc=no
+build_libtool_need_lc=yes
 
 # Whether or not to disallow shared libs when runtime libs are static
 allow_libtool_libs_with_static_runtimes=no
@@ -65,9 +65,9 @@ allow_libtool_libs_with_static_runtimes=no
 fast_install=yes
 
 # The host system.
-host_alias=
-host=x86_64-unknown-linux-gnu
-host_os=linux-gnu
+host_alias=arm-eabi
+host=arm-unknown-eabi
+host_os=eabi
 
 # The build system.
 build_alias=
@@ -78,17 +78,17 @@ build_os=linux-gnu
 echo="echo"
 
 # The archiver.
-AR="ar"
+AR="arm-eabi-ar"
 AR_FLAGS="cru"
 
 # A C compiler.
-LTCC="gcc"
+LTCC="arm-eabi-gcc"
 
 # LTCC compiler flags.
-LTCFLAGS="-g -O2"
+LTCFLAGS="-g -Wall -O2 -march=armv5te -mtune=arm946e-s -fomit-frame-pointer -ffast-math -mthumb -mthumb-interwork"
 
 # A language-specific compiler.
-CC="gcc"
+CC="arm-eabi-gcc"
 
 # Is the compiler the GNU C compiler?
 with_gcc=yes
@@ -97,16 +97,16 @@ with_gcc=yes
 EGREP="/bin/grep -E"
 
 # The linker used to build libraries.
-LD="/usr/bin/ld -m elf_x86_64"
+LD="/opt/devkitpro/devkitARM.r26/arm-eabi/bin/ld"
 
 # Whether we need hard or soft links.
 LN_S="ln -s"
 
 # A BSD-compatible nm program.
-NM="/usr/bin/nm -B"
+NM="/opt/devkitpro/devkitARM/bin//arm-eabi-nm -B"
 
 # A symbol stripping program
-STRIP="strip"
+STRIP="arm-eabi-strip"
 
 # Used to examine libraries when file_magic_cmd begins "file"
 MAGIC_CMD=file
@@ -156,10 +156,10 @@ compiler_c_o="yes"
 need_locks="no"
 
 # Do we need the lib prefix for modules?
-need_lib_prefix=no
+need_lib_prefix=unknown
 
 # Do we need a version for libraries?
-need_version=no
+need_version=unknown
 
 # Whether dlopen is supported.
 dlopen_support=unknown
@@ -186,20 +186,20 @@ whole_archive_flag_spec="\${wl}--whole-archive\$convenience \${wl}--no-whole-arc
 thread_safe_flag_spec=""
 
 # Library versioning type.
-version_type=linux
+version_type=none
 
 # Format of library name prefix.
 libname_spec="lib\$name"
 
 # List of archive names.  First name is the real one, the rest are links.
 # The last name is the one that the linker finds with -lNAME.
-library_names_spec="\${libname}\${release}\${shared_ext}\$versuffix \${libname}\${release}\${shared_ext}\$major \$libname\${shared_ext}"
+library_names_spec=""
 
 # The coded name of the library, if different from the real name.
-soname_spec="\${libname}\${release}\${shared_ext}\$major"
+soname_spec=""
 
 # Commands used to build and install an old-style archive.
-RANLIB="ranlib"
+RANLIB="arm-eabi-ranlib"
 old_archive_cmds="\$AR \$AR_FLAGS \$oldlib\$oldobjs~\$RANLIB \$oldlib"
 old_postinstall_cmds="chmod 644 \$oldlib~\$RANLIB \$oldlib"
 old_postuninstall_cmds=""
@@ -212,10 +212,7 @@ old_archive_from_expsyms_cmds=""
 
 # Commands used to build and install a shared archive.
 archive_cmds="\$CC -shared \$libobjs \$deplibs \$compiler_flags \${wl}-soname \$wl\$soname -o \$lib"
-archive_expsym_cmds="\$echo \\\"{ global:\\\" > \$output_objdir/\$libname.ver~
-  cat \$export_symbols | sed -e \\\"s/\\\\(.*\\\\)/\\\\1;/\\\" >> \$output_objdir/\$libname.ver~
-  \$echo \\\"local: *; };\\\" >> \$output_objdir/\$libname.ver~
-	  \$CC -shared \$libobjs \$deplibs \$compiler_flags \${wl}-soname \$wl\$soname \${wl}-version-script \${wl}\$output_objdir/\$libname.ver -o \$lib"
+archive_expsym_cmds="\$CC -shared \$libobjs \$deplibs \$compiler_flags \${wl}-soname \$wl\$soname \${wl}-retain-symbols-file \$wl\$export_symbols -o \$lib"
 postinstall_cmds=""
 postuninstall_cmds=""
 
@@ -224,8 +221,8 @@ module_cmds=""
 module_expsym_cmds=""
 
 # Commands to strip libraries.
-old_striplib="strip --strip-debug"
-striplib="strip --strip-unneeded"
+old_striplib="arm-eabi-strip --strip-debug"
+striplib="arm-eabi-strip --strip-unneeded"
 
 # Dependencies to place before the objects being linked to create a
 # shared library.
@@ -252,7 +249,7 @@ compiler_lib_search_dirs=""
 compiler_lib_search_path=""
 
 # Method to check whether dependent libraries are shared objects.
-deplibs_check_method="pass_all"
+deplibs_check_method="unknown"
 
 # Command to use when deplibs_check_method == file_magic.
 file_magic_cmd="\$MAGIC_CMD"
@@ -264,7 +261,7 @@ allow_undefined_flag=""
 no_undefined_flag=""
 
 # Commands used to finish a libtool library installation in a directory.
-finish_cmds="PATH=\\\"\\\$PATH:/sbin\\\" ldconfig -n \$libdir"
+finish_cmds=""
 
 # Same as above, but a single script fragment to be evaled but not shown.
 finish_eval=""
@@ -282,16 +279,16 @@ global_symbol_to_c_name_address="sed -n -e 's/^: \\([^ ]*\\) \$/  {\\\"\\1\\\", 
 runpath_var=LD_RUN_PATH
 
 # This is the shared library path variable.
-shlibpath_var=LD_LIBRARY_PATH
+shlibpath_var=
 
 # Is shlibpath searched before the hard-coded library search path?
-shlibpath_overrides_runpath=no
+shlibpath_overrides_runpath=unknown
 
 # How to hardcode a shared library path into an executable.
 hardcode_action=immediate
 
 # Whether we should hardcode library paths into libraries.
-hardcode_into_libs=yes
+hardcode_into_libs=no
 
 # Flag to hardcode $libdir into a binary during linking.
 # This must work even if $libdir does not exist.
@@ -323,16 +320,16 @@ hardcode_automatic=no
 
 # Variables whose values should be saved in libtool wrapper scripts and
 # restored at relink time.
-variables_saved_for_relink="PATH LD_LIBRARY_PATH LD_RUN_PATH GCC_EXEC_PREFIX COMPILER_PATH LIBRARY_PATH"
+variables_saved_for_relink="PATH  LD_RUN_PATH GCC_EXEC_PREFIX COMPILER_PATH LIBRARY_PATH"
 
 # Whether libtool must link a program against all its dependency libraries.
 link_all_deplibs=unknown
 
 # Compile-time system search path for libraries
-sys_lib_search_path_spec="/usr/lib64 /lib64 /usr/local/lib64"
+sys_lib_search_path_spec="/opt/devkitpro/devkitARM.r26/lib/gcc/arm-eabi/4.4.0/thumb /opt/devkitpro/devkitARM.r26/lib/gcc /opt/devkitpro/devkitARM.r26/arm-eabi/lib/thumb"
 
 # Run-time system search path for libraries
-sys_lib_dlsearch_path_spec="/usr/lib64 /lib64 /usr/lib/atlas /usr/lib32/alsa-lib /usr/lib/alsa-lib /usr/local/lib /lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu "
+sys_lib_dlsearch_path_spec="/lib /usr/lib"
 
 # Fix the shell variable $srcfile for the compiler.
 fix_srcfile_path=""
@@ -7318,7 +7315,7 @@ disable_libs=static
 SHELL="/bin/bash"
 
 # Whether or not to build shared libraries.
-build_libtool_libs=yes
+build_libtool_libs=no
 
 # Whether or not to build static libraries.
 build_old_libs=yes
@@ -7330,12 +7327,12 @@ build_libtool_need_lc=no
 allow_libtool_libs_with_static_runtimes=no
 
 # Whether or not to optimize for fast installation.
-fast_install=yes
+fast_install=needless
 
 # The host system.
-host_alias=
-host=x86_64-unknown-linux-gnu
-host_os=linux-gnu
+host_alias=arm-eabi
+host=arm-unknown-eabi
+host_os=eabi
 
 # The build system.
 build_alias=
@@ -7346,17 +7343,17 @@ build_os=linux-gnu
 echo="echo"
 
 # The archiver.
-AR="ar"
+AR="arm-eabi-ar"
 AR_FLAGS="cru"
 
 # A C compiler.
-LTCC="gcc"
+LTCC="arm-eabi-gcc"
 
 # LTCC compiler flags.
-LTCFLAGS="-g -O2"
+LTCFLAGS="-g -Wall -O2 -march=armv5te -mtune=arm946e-s -fomit-frame-pointer -ffast-math -mthumb -mthumb-interwork"
 
 # A language-specific compiler.
-CC="g++"
+CC="arm-eabi-g++"
 
 # Is the compiler the GNU C compiler?
 with_gcc=yes
@@ -7365,16 +7362,16 @@ with_gcc=yes
 EGREP="/bin/grep -E"
 
 # The linker used to build libraries.
-LD="/usr/bin/ld -m elf_x86_64"
+LD="/opt/devkitpro/devkitARM.r26/arm-eabi/bin/ld"
 
 # Whether we need hard or soft links.
 LN_S="ln -s"
 
 # A BSD-compatible nm program.
-NM="/usr/bin/nm -B"
+NM="/opt/devkitpro/devkitARM/bin//arm-eabi-nm -B"
 
 # A symbol stripping program
-STRIP="strip"
+STRIP="arm-eabi-strip"
 
 # Used to examine libraries when file_magic_cmd begins "file"
 MAGIC_CMD=file
@@ -7424,10 +7421,10 @@ compiler_c_o="yes"
 need_locks="no"
 
 # Do we need the lib prefix for modules?
-need_lib_prefix=no
+need_lib_prefix=unknown
 
 # Do we need a version for libraries?
-need_version=no
+need_version=unknown
 
 # Whether dlopen is supported.
 dlopen_support=unknown
@@ -7454,20 +7451,20 @@ whole_archive_flag_spec="\${wl}--whole-archive\$convenience \${wl}--no-whole-arc
 thread_safe_flag_spec=""
 
 # Library versioning type.
-version_type=linux
+version_type=none
 
 # Format of library name prefix.
 libname_spec="lib\$name"
 
 # List of archive names.  First name is the real one, the rest are links.
 # The last name is the one that the linker finds with -lNAME.
-library_names_spec="\${libname}\${release}\${shared_ext}\$versuffix \${libname}\${release}\${shared_ext}\$major \$libname\${shared_ext}"
+library_names_spec=""
 
 # The coded name of the library, if different from the real name.
-soname_spec="\${libname}\${release}\${shared_ext}\$major"
+soname_spec=""
 
 # Commands used to build and install an old-style archive.
-RANLIB="ranlib"
+RANLIB="arm-eabi-ranlib"
 old_archive_cmds="\$AR \$AR_FLAGS \$oldlib\$oldobjs~\$RANLIB \$oldlib"
 old_postinstall_cmds="chmod 644 \$oldlib~\$RANLIB \$oldlib"
 old_postuninstall_cmds=""
@@ -7489,16 +7486,16 @@ module_cmds=""
 module_expsym_cmds=""
 
 # Commands to strip libraries.
-old_striplib="strip --strip-debug"
-striplib="strip --strip-unneeded"
+old_striplib="arm-eabi-strip --strip-debug"
+striplib="arm-eabi-strip --strip-unneeded"
 
 # Dependencies to place before the objects being linked to create a
 # shared library.
-predep_objects="/usr/lib/gcc/x86_64-linux-gnu/4.3.3/../../../../lib/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.3.3/crtbeginS.o"
+predep_objects="/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/thumb/crti.o /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/thumb/crtbegin.o /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/lib/thumb/crt0.o"
 
 # Dependencies to place after the objects being linked to create a
 # shared library.
-postdep_objects="/usr/lib/gcc/x86_64-linux-gnu/4.3.3/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/4.3.3/../../../../lib/crtn.o"
+postdep_objects="/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/thumb/crtend.o /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/thumb/crtn.o"
 
 # Dependencies to place before the objects being linked to create a
 # shared library.
@@ -7506,18 +7503,18 @@ predeps=""
 
 # Dependencies to place after the objects being linked to create a
 # shared library.
-postdeps="-lstdc++ -lm -lgcc_s -lc -lgcc_s"
+postdeps="-lstdc++ -lm -lgcc -lsysbase"
 
 # The directories searched by this compiler when creating a shared
 # library
-compiler_lib_search_dirs="/usr/lib/gcc/x86_64-linux-gnu/4.3.3 /usr/lib/gcc/x86_64-linux-gnu/4.3.3 /usr/lib/gcc/x86_64-linux-gnu/4.3.3/../../../../lib /lib/../lib /usr/lib/../lib /usr/lib/gcc/x86_64-linux-gnu/4.3.3/../../.."
+compiler_lib_search_dirs="/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/thumb /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/lib/thumb /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0 /opt/devkitpro/devkitARM.r26/bin/../lib/gcc /opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/lib"
 
 # The library search path used internally by the compiler when linking
 # a shared library.
-compiler_lib_search_path="-L/usr/lib/gcc/x86_64-linux-gnu/4.3.3 -L/usr/lib/gcc/x86_64-linux-gnu/4.3.3 -L/usr/lib/gcc/x86_64-linux-gnu/4.3.3/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.3.3/../../.."
+compiler_lib_search_path="-L/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/thumb -L/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/lib/thumb -L/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0 -L/opt/devkitpro/devkitARM.r26/bin/../lib/gcc -L/opt/devkitpro/devkitARM.r26/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/lib"
 
 # Method to check whether dependent libraries are shared objects.
-deplibs_check_method="pass_all"
+deplibs_check_method="unknown"
 
 # Command to use when deplibs_check_method == file_magic.
 file_magic_cmd="\$MAGIC_CMD"
@@ -7529,7 +7526,7 @@ allow_undefined_flag=""
 no_undefined_flag=""
 
 # Commands used to finish a libtool library installation in a directory.
-finish_cmds="PATH=\\\"\\\$PATH:/sbin\\\" ldconfig -n \$libdir"
+finish_cmds=""
 
 # Same as above, but a single script fragment to be evaled but not shown.
 finish_eval=""
@@ -7547,16 +7544,16 @@ global_symbol_to_c_name_address="sed -n -e 's/^: \\([^ ]*\\) \$/  {\\\"\\1\\\", 
 runpath_var=LD_RUN_PATH
 
 # This is the shared library path variable.
-shlibpath_var=LD_LIBRARY_PATH
+shlibpath_var=
 
 # Is shlibpath searched before the hard-coded library search path?
-shlibpath_overrides_runpath=no
+shlibpath_overrides_runpath=unknown
 
 # How to hardcode a shared library path into an executable.
 hardcode_action=immediate
 
 # Whether we should hardcode library paths into libraries.
-hardcode_into_libs=yes
+hardcode_into_libs=no
 
 # Flag to hardcode $libdir into a binary during linking.
 # This must work even if $libdir does not exist.
@@ -7588,16 +7585,16 @@ hardcode_automatic=no
 
 # Variables whose values should be saved in libtool wrapper scripts and
 # restored at relink time.
-variables_saved_for_relink="PATH LD_LIBRARY_PATH LD_RUN_PATH GCC_EXEC_PREFIX COMPILER_PATH LIBRARY_PATH"
+variables_saved_for_relink="PATH  LD_RUN_PATH GCC_EXEC_PREFIX COMPILER_PATH LIBRARY_PATH"
 
 # Whether libtool must link a program against all its dependency libraries.
 link_all_deplibs=unknown
 
 # Compile-time system search path for libraries
-sys_lib_search_path_spec="/usr/lib64 /lib64 /usr/local/lib64"
+sys_lib_search_path_spec="/opt/devkitpro/devkitARM.r26/lib/gcc/arm-eabi/4.4.0/thumb /opt/devkitpro/devkitARM.r26/lib/gcc /opt/devkitpro/devkitARM.r26/arm-eabi/lib/thumb"
 
 # Run-time system search path for libraries
-sys_lib_dlsearch_path_spec="/usr/lib64 /lib64 /usr/lib/atlas /usr/lib32/alsa-lib /usr/lib/alsa-lib /usr/local/lib /lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu "
+sys_lib_dlsearch_path_spec="/lib /usr/lib"
 
 # Fix the shell variable $srcfile for the compiler.
 fix_srcfile_path=""
