@@ -66,6 +66,8 @@ MyApp::MyApp()
 	rb1->enable();
 	rb2 = new RadioButton(gui_main, "luigi", 170, 120, rbg);
 	rb3 = new RadioButton(gui_main, "waluigi", 170, 140, rbg);
+
+	NumberSlider *ns = new NumberSlider(gui_main, 10, 170, 42, 0, 255, true);
 }
 
 MyApp::~MyApp() {
