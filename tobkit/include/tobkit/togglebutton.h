@@ -18,41 +18,89 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-#ifndef TOGGLEBUTTON_H
-#define TOGGLEBUTTON_H
+#ifndef TOBKIT_TOGGLEBUTTON_H
+#define TOBKIT_TOGGLEBUTTON_H
 
-#include "widget.h"
+#include "tobkit/widget.h"
 
-class ToggleButton: public Widget {
+namespace TobKit
+{
+
+/**
+ * A button that is toggled on and off, like a switch.
+ * \image html togglebutton.png
+ */
+class ToggleButton: public Widget
+{
 	public:
-		ToggleButton(u8 _x, u8 _y, u8 _width, u8 _height, u16 **_vram, bool _visible=true);
-	
-		// Callback registration
-		void registerToggleCallback(void (*onToggle_)(bool));
+        /**
+         * Creates a ToggleButton
+         * \param owner the GUI that the Button belongs to
+         * \param caption the text on the Button
+         * \param x x-position on the screen.
+         * \param y y-position on the screen
+         * \param width width of the Button
+         * \param height height of the Button
+         * \param listening_buttons hardware buttons that activate the Button, ORed together, e.g. KEY_A | KEY_B
+         * \param visible if the button is drawn and responds to input
+         */
+        ToggleButton(WidgetManager *owner, const string &caption, int x, int y,
+                        int width=-1, int height=-1,
+                        u16 listening_buttons=0, bool visible=true);
 		
-		// Drawing request
-		void pleaseDraw(void);
+        /**
+         * The pen is put down on the Widget.
+         * This method is called by the GUI.
+         * You only need this method if you want to simulate the event manually.
+         */
+        void penDown(int x, int y);
+
+        /**
+         * The pen is lifted from the Widget.
+         * This method is called by the GUI.
+         * You only need this method if you want to simulate the event manually.
+         */
+        void penUp();
+
+        /**
+         * A (hardware) button that the (software) Button reacts to is pressed.
+         * This method is called by the GUI.
+         * You only need this method if you want to simulate the event manually.
+         */
+        void buttonPress(u16 button);
 		
-		// Event calls
-		void penDown(u8 x, u8 y);
-		void penUp(u8 x, u8 y);
-		void buttonPress(u16 button);
+        /**
+         * Change the ToggleButton's caption
+         * \param caption the new caption.
+         */
+		void setCaption(const string &caption);
+
+		/**
+		 * Sets the ToggleButton to be either on or off
+		 * \param on is true if it's on
+		 */
+		void setState(bool on);
 		
-		void setCaption(const char *_caption);
-		
-		void setState(bool _on);
+		/**
+		 * Get the ToggleButton's state
+		 * \return true if it's on.
+		 */
 		bool getState(void);
 	
+		/**
+		 * Emitted if the Button is toggled. The callee should take one boolean
+		 * argument that is true if the ToggleButton is on, false if it is off.
+		 */
+		sigc::signal<void, bool> signal_toggled;
+
 	private:
-		void (*onToggle)(bool);
 		
-		bool penIsDown;
-	
-		bool on;	
-	
 		void draw(void);
-		
-		char *caption;
+
+		bool _pen_is_down, _on;
+		std::string _caption;
+};
+
 };
 
 #endif

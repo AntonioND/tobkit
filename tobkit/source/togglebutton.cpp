@@ -1,140 +1,102 @@
+/*
+ * TobKit - A simple user interface toolkit for Nintendo DS homebrew
+ *                   Copyright 2005-2009 Tobias Weyand (me@tobw.net)
+ *                                   http://code.google.com/p/tobkit
+ *
+ * TobKit is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation, either version 3 of
+ * the License, or (at your option) any later version.
+ *
+ * TobKit is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with TobKit.  If not, see
+ * <http://www.gnu.org/licenses/>.
+ */
+
 #include <string.h>
 #include <stdlib.h>
 
 #include "tobkit/togglebutton.h"
+#include "tobkit/tools.h"
+
+namespace TobKit
+{
 
 /* ===================== PUBLIC ===================== */
 
-ToggleButton::ToggleButton(u8 _x, u8 _y, u8 _width, u8 _height, u16 **_vram, bool _visible)
-	:Widget(_x, _y, _width, _height, _vram, _visible),
-	penIsDown(false), on(false), has_bitmap(false)
+ToggleButton::ToggleButton(WidgetManager *owner, const string &caption, int x,
+        int y, int width, int height, u16 listening_buttons, bool visible)
+    :Widget(x, y, width, height, owner, listening_buttons, visible),
+    _pen_is_down(false), _caption(caption)
 {
-	onToggle = 0;
-	caption = (char*)calloc(1, 1);
+    if(width == -1) {
+        _width = getStringWidth(_caption) + 4;
+    }
+    if(height == -1) {
+        _height = 14;
+    }
+
+    pleaseDraw();
 }
 
-// Callback registration
-void ToggleButton::registerToggleCallback(void (*onToggle_)(bool)) {
-	onToggle = onToggle_;
-}
-
-// Drawing request
-void ToggleButton::pleaseDraw(void) {
+void ToggleButton::penDown(int x, int y)
+{
+	_pen_is_down = true;
+	_on = !_on;
 	draw();
+	signal_toggled(_on);
 }
 
-// Event calls
-void ToggleButton::penDown(u8 x, u8 y)
+void ToggleButton::penUp()
 {
-	penIsDown = true;
-	on = !on;
-	draw();
-	if(onToggle) {
-		onToggle(on);
-	}
-}
-
-void ToggleButton::penUp(u8 x, u8 y)
-{
-	penIsDown = false;
+	_pen_is_down = false;
 	draw();
 }
 
 void ToggleButton::buttonPress(u16 button)
 {
-	on = !on;
+	_on = !_on;
 	draw();
-	if(onToggle) {
-		onToggle(on);
-	}
+	signal_toggled(_on);
 }
 
-void ToggleButton::setCaption(const char *_caption)
+void ToggleButton::setCaption(const string &caption)
 {
-	if(caption != 0)
-		free(caption);
-
-	caption = (char*)malloc(strlen(_caption)+1);
-	strcpy(caption, _caption);
+	_caption = caption;
 }
 
-void ToggleButton::setBitmap(const u8 *_bmp, int _width, int _height)
+void ToggleButton::setState(bool on)
 {
-	has_bitmap = true;
-	bitmap = _bmp;
-	bmpwidth = _width;
-	bmpheight = _height;
-}
-
-void ToggleButton::setState(bool _on)
-{
-	if(on != _on)
+	if(_on != on)
 	{
-		on = _on;
+		_on = on;
 		draw();
-		if(onToggle) {
-			onToggle(on);
-		}
+		signal_toggled(_on);
 	}
 }
 
 bool ToggleButton::getState(void)
 {
-	return on;
+	return _on;
 }
 
 /* ===================== PRIVATE ===================== */
-
-#define MAX(x,y)	((x)>(y)?(x):(y))
 
 void ToggleButton::draw(void)
 {
 	if(!isExposed()) return;
 
-	drawGradient(theme->col_dark_ctrl, theme->col_dark_ctrl, 0, 0, width, height);
+	drawGradient(_theme->gradient_ctrl, 0, 0, _width, _height, !_pen_is_down);
 	drawBorder();
 
-	u16 col;
-	if(penIsDown) {
-		if(on) {
-			col = theme->col_dark_ctrl;
-		} else {
-			col = theme->col_light_ctrl;
-		}
-	} else {
-		if(on) {
-			col = theme->col_light_ctrl;
-		} else {
-			col = theme->col_text;
-		}
-	}
-	if(has_bitmap) {
-		drawMonochromeIcon(2, 2, bmpwidth, bmpheight, bitmap, col);
-	}
-
-	drawString(caption, MAX(2, ((width-getStringWidth(caption))/2) ), height/2-5, 255, col);
-
-	/*
-	if(penIsDown) {
-		if(on) {
-			drawGradient(theme->col_dark_ctrl, theme->col_dark_ctrl, 0, 0, width, height);
-		} else {
-			drawGradient(theme->col_light_ctrl, theme->col_light_ctrl, 0, 0, width, height);
-		}
-	} else {
-		if(on) {
-			drawGradient(theme->col_dark_ctrl, theme->col_dark_ctrl, 0, 0, width, height);
-		} else {
-			drawGradient(theme->col_light_ctrl, theme->col_light_ctrl, 0, 0, width, height);
-		}
-	}
-	drawBorder();
-
-	if(has_bitmap) {
-		drawMonochromeIcon(2, 2, bmpwidth, bmpheight, bitmap);
-	}
-
-	drawString(caption, MAX(2, ((width-getStringWidth(caption))/2) ), height/2-5, 255, theme->col_light_ctrl);
-	*/
+	u16 col = _on ? _theme->col_signal : _theme->col_text;
+	drawString(_caption, MAX(2, ((_width-getStringWidth(_caption))/2) ),
+	        _height/2-5, 255, col);
 }
 
+}

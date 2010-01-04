@@ -199,7 +199,7 @@
 #include <tobkit/radiobutton.h>
 //#include <tobkit/tabbox.h>
 
-//#include <tobkit/togglebutton.h>
+#include <tobkit/togglebutton.h>
 #include <tobkit/typewriter.h>
 //#include <tobkit/typewriter.hit.h>
 //#include <tobkit/typewriter.map.h>
