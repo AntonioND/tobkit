@@ -31,7 +31,6 @@ MyApp::MyApp()
 	lcdMainOnBottom();
 
     groupbox = new GroupBox(gui_main, "bla!", 2, 0, 70, 90);
-    groupbox->setCaption("bla!"); // TODO: Without this line the widget is optimized away
 
 	Button *button = new Button(gui_main, "Push me!", 110, 170);
 	button->signal_pushed.connect(sigc::mem_fun(this, &MyApp::sayHello));
