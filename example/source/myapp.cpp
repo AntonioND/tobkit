@@ -68,6 +68,7 @@ MyApp::MyApp()
 	rb3 = new RadioButton(gui_main, "waluigi", 170, 140, rbg);
 
 	NumberSlider *ns = new NumberSlider(gui_main, 10, 170, 42, 0, 255, true);
+	ns->signal_changed.connect(sigc::mem_fun(this, &MyApp::nsChanged));
 }
 
 MyApp::~MyApp() {
@@ -144,3 +145,7 @@ void MyApp::flipText(bool on)
     listbox->set(idx, name);
 }
 
+void MyApp::nsChanged(int value)
+{
+    printf("%d", value);
+}

@@ -44,6 +44,8 @@ private:
 
     void flipText(bool on);
 
+    void nsChanged(int value);
+
 	GUI *gui_main, *gui_sub;
 	TobKit::Keyboard *kb;
 	TobKit::Typewriter *tw;
