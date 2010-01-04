@@ -1,0 +1,6 @@
+.history.tob
+libsigc++-2.2.3/tests/
+*.cproject
+*.cdtproject
+*.project
+.settings
