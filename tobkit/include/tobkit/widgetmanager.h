@@ -172,7 +172,8 @@ class WidgetManager {
         void removeOverlayWidget();
 
         /**
-         * Find the widget that got hit by the pen
+         * Find the widget that got hit by the pen. In case of overlapping Widgets,
+         * the uppermost Widget (i.e. the one that was added last) is returned.
          * \param x the pen's x-coordinate.
          * \param y the pen's y-coordinate.
          * \returns the Widget that got hit, or NULL if no Widget got hit.

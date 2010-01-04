@@ -13,7 +13,7 @@ GroupBox::GroupBox(WidgetManager *owner, const string &caption, int x, int y, in
       :Widget(x, y, width, height, owner, NULL, visible),
        _caption(caption)
 {
-
+    pleaseDraw();
 }
 
 GroupBox::~GroupBox()

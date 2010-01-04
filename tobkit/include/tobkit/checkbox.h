@@ -18,8 +18,8 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _CHECKBOX_H_
-#define _CHECKBOX_H_
+#ifndef TOBKIT_CHECKBOX_H
+#define TOBIKT_CHECKBOX_H
 
 #include "tobkit/widget.h"
 
@@ -41,8 +41,8 @@ class CheckBox: public Widget
          * \param x x-position on the screen.
          * \param y y-position on the screen
          * \param checked whether or not it's checked
-         * \param width how many pixels it's wide
-         * \param height how many pixels it's high
+         * \param width how many pixels it's wide.  If this is -1 the width is determined automatically.
+         * \param height how many pixels it's high.  If this is -1 the height is determined automatically.
          * \param visible if the Widget is drawn and responds to input
          * \param listening_buttons hardware buttons that activate the Button, ORed together, e.g. KEY_A | KEY_B
          */
