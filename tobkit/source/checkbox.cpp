@@ -48,10 +48,6 @@ CheckBox::CheckBox(WidgetManager *owner, string caption, int x, int y, bool chec
     pleaseDraw();
 }
 
-CheckBox::~CheckBox()
-{
-}
-
 void CheckBox::setCaption(string caption)
 {
 	_caption = caption;
