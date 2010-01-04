@@ -48,8 +48,6 @@ class CheckBox: public Widget
          */
         CheckBox(WidgetManager *owner, string caption, int x, int y, bool checked=false, int width=-1, int height=-1,
                 bool visible=true, u16 listening_buttons=0);
-
-		~CheckBox();
 		
 		/**
 		 * Change the CheckBox's caption
