@@ -71,6 +71,8 @@ MyApp::MyApp()
 	ns->signal_changed.connect(sigc::mem_fun(this, &MyApp::nsChanged));
 
 	ToggleButton *tb = new ToggleButton(gui_main, "Party!", 210, 60);
+
+	ToggleBitButton *tbb = new ToggleBitButton(gui_main, bitbutton_circle_bin, 210, 40);
 }
 
 MyApp::~MyApp() {

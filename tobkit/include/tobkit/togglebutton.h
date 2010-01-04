@@ -93,7 +93,7 @@ class ToggleButton: public Widget
 		 */
 		sigc::signal<void, bool> signal_toggled;
 
-	private:
+	protected:
 		
 		void draw(void);
 
