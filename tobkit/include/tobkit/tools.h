@@ -25,13 +25,14 @@
  *      Author: tob
  */
 
-#ifndef TOOLS_H_
-#define TOOLS_H_
+#ifndef TOBKIT_TOOLS_H
+#define TOBKIT_TOOLS_H
 
 namespace TobKit
 {
-#define	abs(x)	        (x<0?(-x):(x))
-};
+#define	ABS(x)	    ((x)<0?(-x):(x))
+#define MIN(x,y)    ((x)<(y)?(x):(y))
+#define MAX(x,y)    ((x)>(y)?(x):(y))
 
 inline s32 clamp(s32 x, s32 m, s32 M) {
     return max(m, min(M, x));
@@ -41,5 +42,7 @@ inline s32 clamp(s32 x, s32 m, s32 M) {
 inline s32 roundUpDiv(s32 x, s32 y) {
     return (x + (y - 1)) / y;
 }
+
+};
 
 #endif /* TOOLS_H_ */
