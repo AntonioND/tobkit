@@ -51,7 +51,7 @@ class BitButton: public Widget
          * \param visible if the BitButton is drawn and responds to input
          */
 	    BitButton(WidgetManager *owner, const u8 *bitmap, int x, int y, int width=17, int height=17,
-	            u8 bmpwidth=13, u8 bmpheight=13, u8 bmpx=2, u8 bmpy=2, u16 listening_buttons=0, bool visible=true);
+	            int bmpwidth=13, int bmpheight=13, int bmpx=2, int bmpy=2, u16 listening_buttons=0, bool visible=true);
 
 		/**
          * The pen is put down on the Widget.
@@ -84,7 +84,7 @@ class BitButton: public Widget
 
 		bool _pen_is_down;
 		const u8 *_bitmap;
-		u8 _bmpwidth, _bmpheight, _bmpx, _bmpy;
+		int _bmpwidth, _bmpheight, _bmpx, _bmpy;
 };
 
 };

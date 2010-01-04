@@ -26,7 +26,7 @@ namespace TobKit
 /* ===================== PUBLIC ===================== */
 
 BitButton::BitButton(WidgetManager *owner, const u8 *bitmap, int x, int y, int width, int height,
-    u8 bmpwidth, u8 bmpheight, u8 bmpx, u8 bmpy, u16 listening_buttons, bool visible)
+    int bmpwidth, int bmpheight, int bmpx, int bmpy, u16 listening_buttons, bool visible)
 	:Widget(x, y, width, height, owner, listening_buttons, visible),
 	_pen_is_down(false), _bitmap(bitmap), _bmpwidth(bmpwidth),
 	_bmpheight(bmpheight), _bmpx(bmpx), _bmpy(bmpy)
