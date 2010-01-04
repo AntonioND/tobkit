@@ -69,6 +69,8 @@ MyApp::MyApp()
 
 	NumberSlider *ns = new NumberSlider(gui_main, 10, 170, 42, 0, 255, true);
 	ns->signal_changed.connect(sigc::mem_fun(this, &MyApp::nsChanged));
+
+	ToggleButton *tb = new ToggleButton(gui_main, "Party!", 210, 60);
 }
 
 MyApp::~MyApp() {
