@@ -27,7 +27,7 @@ namespace TobKit {
 
 /**
  * Lets the user choose a number.
- * \image html numberbox.png
+ * \image html numberslider.png
  */
 class NumberSlider: public Widget {
 

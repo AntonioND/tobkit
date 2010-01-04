@@ -42,7 +42,7 @@ MyApp::MyApp()
 	Button *btn_clear = new Button(gui_main, "clear", 10, 50);
 	Button *btn_ins = new Button(gui_main, "ins", 10, 70);
 
-	Label *label = new Label(gui_main, "I'm a Label!", 50, 150, true);
+	label = new Label(gui_main, "I'm a Label!", 50, 150, true);
 
 	listbox->add("This");
 	listbox->add("is");
