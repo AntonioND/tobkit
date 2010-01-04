@@ -241,7 +241,7 @@ class Widget
 		 * \param length the length of the line
 		 * \param col the color of the line
 		 */
-		void drawHLine(int tx, int ty, int length, u16 col);
+		void drawHLine(int tx, int ty, int length, u16 col=RGB15(0,0,0)|BIT(15));
 
 		/**
          * Draw a vertical line
@@ -250,7 +250,7 @@ class Widget
          * \param length the length of the line
          * \param col the color of the line
          */
-		void drawVLine(int tx, int ty, int length, u16 col);
+		void drawVLine(int tx, int ty, int length, u16 col=RGB15(0,0,0)|BIT(15));
 
 		/**
 		 * Draw a line of arbitrary direction
@@ -260,7 +260,7 @@ class Widget
 		 * \param ty2 the y-coordinate of the end of the line
 		 * \param the color of the line
 		 */
-		void drawLine(int tx1, int ty1, int tx2, int ty2, u16 col);
+		void drawLine(int tx1, int ty1, int tx2, int ty2, u16 col=RGB15(0,0,0)|BIT(15));
 
 		/**
 		 * Draws one pixel.
@@ -268,7 +268,7 @@ class Widget
 		 * \param ty the y-coordinate of the pixel
 		 * \param col the color of the pixel
 		 */
-		void drawPixel(int tx, int ty, u16 col);
+		void drawPixel(int tx, int ty, u16 col=RGB15(0,0,0)|BIT(15));
 
 		/**
 		 * Draws a color gradient.
