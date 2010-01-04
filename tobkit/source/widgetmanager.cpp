@@ -256,10 +256,10 @@ Widget *WidgetManager::getWidgetAt(int x, int y) {
 
     // Else follow the normal procedure
     bool found = false;
-    std::vector<Widget*>::iterator w_it, end_it;
+    std::vector<Widget*>::reverse_iterator w_it, end_it;
 
-    w_it = _widgets.begin();
-    end_it = _widgets.end();
+    w_it = _widgets.rbegin();
+    end_it = _widgets.rend();
 
 
     while((w_it!=end_it) && (!found)) {
