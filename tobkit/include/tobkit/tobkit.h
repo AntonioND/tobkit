@@ -194,7 +194,7 @@
 //#include <tobkit/memoryindicator.h>
 //#include <tobkit/messagebox.h>
 //#include <tobkit/numberbox.h>
-//#include <tobkit/numberslider.h>
+#include <tobkit/numberslider.h>
 //#include <tobkit/pixmap.h>
 #include <tobkit/radiobutton.h>
 //#include <tobkit/tabbox.h>
