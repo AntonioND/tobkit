@@ -35,7 +35,7 @@ namespace TobKit
 #define MAX(x,y)    ((x)>(y)?(x):(y))
 
 inline s32 clamp(s32 x, s32 m, s32 M) {
-    return max(m, min(M, x));
+    return MAX(m, MIN(M, x));
 }
 
 // Returns the upper Gauss bracket of the quotient of two integers x and y
