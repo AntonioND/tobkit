@@ -80,6 +80,12 @@ class Button: public Widget
          */
         void setCaption(const string &caption);
 
+        /*
+         * Get the Button's caption
+         * \return caption the Button's caption.
+         */
+        const string &getCaption();
+
         /**
          * This signal is emitted if the Button is pushed.
          */

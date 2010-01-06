@@ -74,6 +74,11 @@ void Button::setCaption(const string &caption)
     draw();
 }
 
+const string &Button::getCaption()
+{
+    return _caption;
+}
+
 /* ===================== PRIVATE ===================== */
 
 void Button::draw(void)
