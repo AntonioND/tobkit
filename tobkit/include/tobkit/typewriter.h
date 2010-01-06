@@ -18,8 +18,8 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _TYPEWRITER_H_
-#define _TYPEWRITER_H_
+#ifndef TOBKIT_TYPEWRITER_H
+#define TOBKIT_TYPEWRITER_H
 
 #include "tobkit/widget.h"
 #include "tobkit/label.h"
@@ -29,31 +29,73 @@
 
 namespace TobKit {
 
+/**
+ * A dialog window showing a Typewriter for entering text on an on-screen keyboard.
+ * \image html typewriter.png
+ */
 class Typewriter: public Widget, public WidgetManager {
 	public:
+        /**
+         * Creates a Typewriter
+         * \param owner the GUI that the Widget belongs to
+         * \param message the message (or question) displayed in the title of the Tpewriter
+         * \param text the initial text shown in the text box of the Typewriter
+         */
 	    Typewriter(WidgetManager *owner, const string &message, const string &text="");
 		~Typewriter(void);
 
-		// Set up the keyboard graphics using a tiled background
-        void setupPalette(void);
-        void setupTileBg(void);
+        /**
+         * The pen is put down on the Widget.
+         * This method is called by the GUI.
+         * You only need this method if you want to simulate the event manually.
+         */
+        void penDown(int x, int y);
 
-		// Event calls
-		void penDown(int x, int y);
-		void penUp();
+         /**
+         * The pen is lifted from the Widget.
+         * This method is called by the GUI.
+         * You only need this method if you want to simulate the event manually.
+         */
+        void penUp();
 
+        /**
+         * This is called to notify the widget that a hardware button was pressed.
+         * \param button the hardware button that was pressed (as defined in libnds)
+         */
 		void buttonPress(u16 button);
 
+		/**
+		 * Sets the text in the box where the text you type is shown.
+		 */
 		void setText(const string &text);
+
+		/**
+		 * Gets the text in the box where the text you type is shown.
+		 */
 		const string &getText(void);
 
-		void show(void);
-		void reveal(void);
+        /**
+         * Flags the Widget as visible and draws it.
+         */
+        void show(void);
+
+        /**
+         * Flags the Widget as not occluded.
+         */
+        void reveal(void);
 
 		// Signals
 		sigc::signal<void> signal_ok, signal_cancel;
 
 	private:
+        void draw(void);
+        void redraw(void);
+        void drawCursor(void);
+        void setTile(int x, int y, int pal);
+        // Set up the keyboard graphics using a tiled background
+        void setupPalette(void);
+        void setupTileBg(void);
+
 	    enum Mode {Normal, Shift, Caps};
 
 		u16 *char_base, *map_base;
@@ -73,11 +115,6 @@ class Typewriter: public Widget, public WidgetManager {
 
 		string _text;
 		u16 cursorpos;
-
-		void draw(void);
-		void redraw(void);
-		void drawCursor(void);
-		void setTile(int x, int y, int pal);
 };
 
 };

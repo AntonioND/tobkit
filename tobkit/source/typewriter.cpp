@@ -81,25 +81,6 @@ Typewriter::~Typewriter(void)
 	delete buttoncancel;
 }
 
-void Typewriter::setupPalette(void)
-{
-    u16 *pal_normal, *pal_highlight;
-    Widget::_gui->addPalette(&pal_normal, &pal_id_normal);
-    Widget::_gui->addPalette(&pal_highlight, &pal_id_highlight);
-
-    dmaCopy((u16*)typewriter_Palette, pal_normal, 32);
-    dmaCopy((u16*)typewriter_Palette_Hilight, pal_highlight, 32);
-}
-
-void Typewriter::setupTileBg(void)
-{
-    int bg, bgh;
-    Widget::_gui->addTileBackground(this, 7776, &char_base, 312, &map_base, &bg, &bgh);
-    dmaCopy((u16*)typewriter_Tiles, char_base, 7776);
-    bgSetScroll(bgh, -kx, -ky);
-    bgUpdate();
-}
-
 // Event calls
 void Typewriter::penDown(int x, int y)
 {
@@ -338,6 +319,25 @@ void Typewriter::setTile(int x, int y, int pal)
 		x2 = x;
 		y2--;
 	}
+}
+
+void Typewriter::setupPalette(void)
+{
+    u16 *pal_normal, *pal_highlight;
+    Widget::_gui->addPalette(&pal_normal, &pal_id_normal);
+    Widget::_gui->addPalette(&pal_highlight, &pal_id_highlight);
+
+    dmaCopy((u16*)typewriter_Palette, pal_normal, 32);
+    dmaCopy((u16*)typewriter_Palette_Hilight, pal_highlight, 32);
+}
+
+void Typewriter::setupTileBg(void)
+{
+    int bg, bgh;
+    Widget::_gui->addTileBackground(this, 7776, &char_base, 312, &map_base, &bg, &bgh);
+    dmaCopy((u16*)typewriter_Tiles, char_base, 7776);
+    bgSetScroll(bgh, -kx, -ky);
+    bgUpdate();
 }
 
 };
