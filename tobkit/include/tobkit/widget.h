@@ -93,12 +93,13 @@ class Widget
 		bool isExposed(void);
 
 		/**
-		 * Flags the Widget as visible.
+		 * Flags the Widget as visible and draws it.
+		 * When writing a Widget that contains other Widgets you should overload this function to show member Widgets recursively.
 		 */
 		virtual void show(void);
 
 		/**
-		 * Flags the Widget as invisible.
+		 * Flags the Widget as invisible and eases it.
 		 */
 		virtual void hide(void);
 
@@ -114,7 +115,9 @@ class Widget
 		virtual void occlude(void);
 
 		/**
-         * Flags the Widget as not occluded. Only call this when implementing a Widget can manages occlusions, like a TabBox.
+         * Flags the Widget as not occluded.
+         * Only call this when implementing a Widget can manages occlusions, like a TabBox.
+         * When writing a Widget that contains other Widgets you should overload this function to reveal member Widgets recursively.
          */
 		virtual void reveal(void);
 

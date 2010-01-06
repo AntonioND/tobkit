@@ -328,7 +328,7 @@ void Widget::drawGradient(const std::vector<u16> &gradient, int tx, int ty, int 
 // How wide is the string when rendered?
 int Widget::getStringWidth(const string &str, u16 limit)
 {
-	int i,res=0,charidx,len = str.length();
+	int i,res=0,charidx,len = str.size();
 	if((limit!=USHRT_MAX)&&(limit<len)) {
 		len = limit;
 	}
