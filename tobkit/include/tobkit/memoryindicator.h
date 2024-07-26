@@ -23,6 +23,9 @@
 
 #include "widget.h"
 
+namespace TobKit
+{
+
 class MemoryIndicator : public Widget
 {
 	public:
@@ -37,6 +40,8 @@ class MemoryIndicator : public Widget
 		u32 getFreeMem(void);
 		
 		u32 total_ram;
+};
+
 };
 
 #endif /*MEMORYINDICATOR_H_*/

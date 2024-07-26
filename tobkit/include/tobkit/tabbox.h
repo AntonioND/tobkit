@@ -26,6 +26,9 @@
 
 #include <vector>
 
+namespace TobKit
+{
+
 class TabBox: public Widget {
 	public:
 		TabBox(u8 _x, u8 _y, u8 _width, u8 _height, u16 **_vram, bool _visible=true);
@@ -64,6 +67,8 @@ class TabBox: public Widget {
 		std::vector<GUI> guis;
 	
 		void (*onTabChange)(u8 tab);
+};
+
 };
 
 #endif

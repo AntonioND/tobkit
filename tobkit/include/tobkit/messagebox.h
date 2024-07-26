@@ -26,6 +26,9 @@
 #include "label.h"
 #include "button.h"
 
+namespace TobKit
+{
+
 class MessageBox: public Widget {
 	public:
 		MessageBox(u16 **_vram, const char *message, u8 n_buttons, ...);
@@ -50,6 +53,8 @@ class MessageBox: public Widget {
 		Button **buttons;
 		void (**callbacks)(void);
 		u8 n_buttons;
+};
+
 };
 
 #endif

@@ -24,6 +24,9 @@
 #include "widget.h"
 #include <nds.h>
 
+namespace TobKit
+{
+
 class NumberBox: public Widget {
 	public:
 		NumberBox(u8 _x, u8 _y, u8 _width, u8 _height, uint16 **_vram, u8 _value=0, u8 min=0, u8 max=255);
@@ -47,6 +50,8 @@ class NumberBox: public Widget {
 		u8 value;
 		u8 min, max;
 		u8 btnstate;
+};
+
 };
 
 #endif

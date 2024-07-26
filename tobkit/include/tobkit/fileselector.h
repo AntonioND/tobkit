@@ -28,6 +28,9 @@
 #include <map>
 #include <string>
 
+namespace TobKit
+{
+
 typedef std::map<std::string, std::vector<std::string> > FilterSet;
 
 class File {
@@ -86,6 +89,8 @@ class FileSelector: public ListBox {
 		void (*onDirChange)(const char *newdir);
 		
 		std::vector<File> filelist; // Files that are displayed
+};
+
 };
 
 #endif

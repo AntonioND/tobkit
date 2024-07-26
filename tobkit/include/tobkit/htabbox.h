@@ -26,6 +26,9 @@
 
 #include <vector>
 
+namespace TobKit
+{
+
 // Same as the tabbox, but with tabs on the left instead of on topHTabBox *
 // Also, the icons are smaller, because I need to save space :-)
 
@@ -67,6 +70,8 @@ class HTabBox: public Widget {
 		std::vector<GUI> guis;
 		
 		void (*onTabChange)(u8 tab);
+};
+
 };
 
 #endif
