@@ -21,6 +21,7 @@ libsigc++-2.2.3/sigc++/slot.lo
 libsigc++-2.2.3/sigc++/slot_base.lo
 libsigc++-2.2.3/sigc++/trackable.lo
 tobkit/build/
+tobkit/lib/
 tobkit/doc/
 tobkit/gfx/radiobutton_checked.rgb
 tobkit/gfx/radiobutton_mask.rgb
