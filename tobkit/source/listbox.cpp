@@ -253,7 +253,7 @@ void ListBox::draw(void) {
     }
 
      // Content
-     for(uint i = 0; (i < (uint)(_height / ROW_HEIGHT + 1)) && (scrollpos + i < (uint)_elements.size()); ++i) {
+     for(unsigned int i = 0; (i < (unsigned int)(_height / ROW_HEIGHT + 1)) && (scrollpos + i < (unsigned int)_elements.size()); ++i) {
          drawString(_elements.at(_scrollthingy->getScrollPosition() + i).c_str(), contentoffset + 2, ROW_HEIGHT * i + 2 - row_pixel_offset, _width - contentoffset - 2 - ScrollThingy::WIDTH - 2);
      }
 

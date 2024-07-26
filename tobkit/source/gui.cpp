@@ -248,7 +248,7 @@ bool GUI::delTileBackground(Widget *widget)
         }
         std::vector<Widget*> tile_widgets_tmp = _tile_widgets;
         _tile_widgets.clear();
-        for (uint i = 0; i < tile_widgets_tmp.size(); ++i) {
+        for (unsigned int i = 0; i < tile_widgets_tmp.size(); ++i) {
             tile_widgets_tmp[i]->setupTileBg();
             tile_widgets_tmp[i]->pleaseDraw();
         }

@@ -137,16 +137,16 @@ void Widget::disable(void)
 
 // Draw utility functions
 
-void Widget::drawString(const string &str, int tx, int ty, uint maxwidth, u16 color)
+void Widget::drawString(const string &str, int tx, int ty, unsigned int maxwidth, u16 color)
 {
 	int charidx, i, j;
-	uint drawpos = 0; u8 col;
+	unsigned int drawpos = 0; u8 col;
 	char *charptr;
 	int startline = (ty > 0) ? 0 : -ty;
 	int endline = (ty + FONT_HEIGHT < _height) ? FONT_HEIGHT : (_height - ty);
 	if(endline <= startline) return;
 
-	for(uint pos = 0; pos < str.length(); ++pos) {
+	for(unsigned int pos = 0; pos < str.length(); ++pos) {
 		charptr = strchr(fontchars, str[pos]);
 		if(charptr==0) {
 			charidx = 66; // '?'

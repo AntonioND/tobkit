@@ -72,7 +72,7 @@ void Keyboard::setupPalette(void)
 void Keyboard::setupTileBg(void)
 {
     _gui->addTileBackground(this, 736, &_char_base, 140, &_map_base);
-    dmaCopy((uint16*)keyboard_Tiles, _char_base, 736);
+    dmaCopy((uint16_t*)keyboard_Tiles, _char_base, 736);
 }
 
 

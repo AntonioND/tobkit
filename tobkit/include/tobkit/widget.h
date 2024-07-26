@@ -209,7 +209,7 @@ class Widget
 		 * \param color the color of the text as an RGB15
 		 * \sa \ref custom_font
 		 */
-		void drawString(const string &str, int tx, int ty, uint maxwidth=255, u16 color=RGB15(0,0,0)|BIT(15));
+		void drawString(const string &str, int tx, int ty, unsigned int maxwidth=255, u16 color=RGB15(0,0,0)|BIT(15));
 
 		/**
 		 * Draw a rectangular box (outlined).
