@@ -1,12 +1,9 @@
-.history.tob
-libsigc++-2.2.3/tests/
-*.cproject
-*.cdtproject
-*.project
-.settings
+*.nds
+*.sav
 example/build/
 example/data/
 example/gfx/
+libsigc++-2.2.3/tests/
 libsigc++-2.2.3/docs/manual/html/
 libsigc++-2.2.3/examples/
 libsigc++-2.2.3/include/
@@ -27,4 +24,3 @@ tobkit/gfx/radiobutton_checked.rgb
 tobkit/gfx/radiobutton_mask.rgb
 tobkit/gfx/radiobutton_unchecked.rgb
 tobkit/tools/rgb2bin
-

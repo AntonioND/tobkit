@@ -5,8 +5,6 @@ MyApp *myapp;
 
 int main(void)
 {
-	irqEnable(IRQ_VBLANK);
-
 	myapp = new MyApp();
 	myapp->mainLoop();
 

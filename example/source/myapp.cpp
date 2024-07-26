@@ -101,7 +101,7 @@ void MyApp::mainLoop(void)
 
 void MyApp::sayHello(void)
 {
-    iprintf("Hello\n");
+    printf("Hello\n");
 }
 
 void MyApp::handleTypewriterOk(void)

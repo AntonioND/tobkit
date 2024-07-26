@@ -219,7 +219,7 @@ void WidgetManager::removeWidget(Widget *w)
     if (*wit == w) {
         _widgets.erase(wit);
     } else {
-        iprintf("Fatal error: Widget to be deleted not found!\n");
+        printf("Fatal error: Widget to be deleted not found!\n");
     }
 
     // Delete shortcuts associated with the widget
